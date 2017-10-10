@@ -216,6 +216,10 @@
     <Compile Include="Migrations\201710101547036_AddUnitsNeededAndInStockToProductsTable.Designer.cs">
       <DependentUpon>201710101547036_AddUnitsNeededAndInStockToProductsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710101558250_ApplyAnnotationsToProduct.cs" />
+    <Compile Include="Migrations\201710101558250_ApplyAnnotationsToProduct.Designer.cs">
+      <DependentUpon>201710101558250_ApplyAnnotationsToProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -312,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710101547036_AddUnitsNeededAndInStockToProductsTable.resx">
       <DependentUpon>201710101547036_AddUnitsNeededAndInStockToProductsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710101558250_ApplyAnnotationsToProduct.resx">
+      <DependentUpon>201710101558250_ApplyAnnotationsToProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
