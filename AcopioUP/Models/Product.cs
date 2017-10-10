@@ -12,5 +12,9 @@ namespace AcopioUP.Models
         public string Name { get; set; }
 
         public string ImgSrc { get; set; }
+
+        public int UnitsNeeded { get; set; }
+
+        public int UnitsInStock { get; set; }
     }
 }
