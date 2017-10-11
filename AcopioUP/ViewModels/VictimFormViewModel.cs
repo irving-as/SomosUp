@@ -30,7 +30,7 @@ namespace AcopioUP.ViewModels
 
         public VictimFormViewModel()
         {
-            Id = 0;
+            Id = 0; 
         }
 
         public VictimFormViewModel(Victim victim)
