@@ -21,6 +21,6 @@ namespace AcopioUP.Models
 
         [Required]
         [StringLength(255)]
-        public string Email { get; set; }
+        public string Email { get; set; } 
     }
 }
