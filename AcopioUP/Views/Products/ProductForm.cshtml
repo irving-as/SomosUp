@@ -1,0 +1,49 @@
+﻿@model AcopioUP.Dtos.ProductDto
+
+@{
+    ViewBag.Title = "Agregar Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@(Model.Id == 0 ? "Agregar" : "Editar") Producto</h2>
+
+
+@using (Html.BeginForm("Save", "Products", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(p => p.Name)
+        @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Name)
+
+        @Html.LabelFor(p => p.UnitsNeeded)
+        @Html.TextBoxFor(p => p.UnitsNeeded, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.UnitsNeeded)
+
+        <label class="btn btn-info">
+            Escoger Imagen <input id="fileInput" type="file" style="display: none;" name="productImage">
+        </label>
+        <span id="fileNameText">No has seleccionado ningún archivo</span>
+        <br />
+        
+        @Html.HiddenFor(p => p.Id)
+        @Html.HiddenFor(p => p.UnitsInStock)
+
+        <button disabled="@(Model.Id == 0)" id="submitButton" type="submit" class="btn btn-primary">@(Model.Id == 0 ? "Agregar" : "Editar")</button>
+    </div>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#fileInput").change(function () {
+                var fileName = $(this).val();
+                $("#fileNameText").text(fileName);
+                $("#submitButton").prop("disabled", false);
+            });
+        });
+    </script>
+    @Scripts.Render("~/ bundles / jqueryval")
+}
+

@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}

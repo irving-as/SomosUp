@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using AcopioUP.Models;
 
-namespace AcopioUP.Models
+namespace AcopioUP.Dtos
 {
-    public class Product
+    public class ProductDto
     {
         public int Id { get; set; }
 
@@ -14,12 +15,9 @@ namespace AcopioUP.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string ImgSrc { get; set; }
-        
         public int UnitsNeeded { get; set; }
 
+        [StockLessThanOrEqualThanNeeded]
         public int UnitsInStock { get; set; }
     }
 }
