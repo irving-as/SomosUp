@@ -1,0 +1,43 @@
+﻿@using AcopioUP.Models
+@model IEnumerable<Victim>
+@{
+    ViewBag.Title = "ReadOnlyList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Víctimas</h2>
+
+<table id="victims" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var table = $("#victims").DataTable({
+                ajax: {
+                    url: "/api/victims",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "fullName"
+                    },
+                    {
+                        data: "email"
+                    }
+                ]
+            });
+
+        });
+    </script>
+}
