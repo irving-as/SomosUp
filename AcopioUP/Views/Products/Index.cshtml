@@ -6,27 +6,31 @@
 
 <h2>Productos Necesarios</h2>
 
-@Html.ActionLink("Agregar Nuevo Producto", "New", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Agregar Nuevo Producto", "New", null, new { @class = "btn btn-primary", @style = "margin-bottom: 10px" })
 
 @if (!Model.Any())
 {
     <p>No hay productos agregados aún.</p>
 }
-@foreach (var product in Model)
-{
-    <div class="row vertical-align">
-        <div class="col-sm-4">
-            <h3>@product.Name</h3>
-            <img class="img-thumbnail img-responsive" src="/Content/Images/Products/@product.ImgSrc" alt="@product.Name" />
-            @Html.ActionLink("Editar", "Edit", new { @id = product.Id }, new { @style = "display: block;" })
-        </div>
-        <div class="col-sm-8">
-            <div class="progress">
-                <div class="progress-bar progress-bar progress-bar-striped" role="progressbar"
-                     aria-valuenow="@product.UnitsInStock" aria-valuemin="0" aria-valuemax="@product.UnitsNeeded" style="width: @(100 * product.UnitsInStock / product.UnitsNeeded)%">
+<ul class="list-group">
+    @foreach (var product in Model)
+    {
+        <li class="list-group-item">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <img src="/Content/Images/Products/@product.ImgSrc" class="media-object" style="width: 60px" alt="@product.Name" />
+                </div>
+                <div class="media-body">
+                    <h3>@product.Name</h3>
+                    @Html.ActionLink("Editar", "Edit", new { @id = product.Id }, new { @style = "display: block;" })
+                    <div class="progress">
+                        <div class="progress-bar progress-bar progress-bar-striped" role="progressbar"
+                             aria-valuenow="@product.UnitsInStock" aria-valuemin="0" aria-valuemax="@product.UnitsNeeded" style="width: @(100 * product.UnitsInStock / product.UnitsNeeded)%">
+                        </div>
+                    </div>
+                    <p>@product.UnitsInStock de @product.UnitsNeeded</p>
                 </div>
             </div>
-            <p>@product.UnitsInStock de @product.UnitsNeeded</p>
-        </div>
-    </div>
-}
+        </li>
+    }
+</ul>
