@@ -19,6 +19,14 @@ namespace AcopioUP.App_Start
             _configuration = new MapperConfigurationExpression();
             _configuration.CreateMap<Victim, VictimDto>();
             _configuration.CreateMap<VictimDto, Victim>();
+            
+            // Domain to Dto
+            _configuration.CreateMap<Product, ProductDto>();
+
+            // Dto to Domain
+            _configuration.CreateMap<ProductDto, Product>()
+                .ForMember(p => p.Id, opt => opt.Ignore())
+                .ForMember(p => p.ImgSrc, opt => opt.Ignore());
         }
 
         public static MapperConfigurationExpression ConfigurationProfile()
