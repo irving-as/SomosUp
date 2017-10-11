@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AcopioUP.Dtos;
@@ -44,15 +42,31 @@ namespace AcopioUP.Controllers
 
         public ActionResult Edit(int id)
         {
-            var product = _context.Products.SingleOrDefault(p => p.Id == id);
+            var productInDb = _context.Products.SingleOrDefault(p => p.Id == id);
 
-            if (product == null)
+            if (productInDb == null)
                 return HttpNotFound();
 
-            return View("ProductForm", Mapper.Map<ProductDto>(product));
+            return View("ProductForm", Mapper.Map<ProductDto>(productInDb));
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var productInDb = _context.Products.SingleOrDefault(p => p.Id == id);
+
+            if (productInDb == null)
+                return HttpNotFound();
+
+            _context.Products.Remove(productInDb);
+            _context.SaveChanges();
+
+            DeleteFileFromDisk("~/Content/Images/Products", productInDb.ImgSrc);
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(ProductDto productDto)
         {
             var productImage = Request.Files["productImage"];
@@ -93,7 +107,7 @@ namespace AcopioUP.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Products");
+            return RedirectToAction("Index");
         }
 
         public string SaveImageToLocation(HttpPostedFileBase productImage, string path)

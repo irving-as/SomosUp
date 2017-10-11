@@ -8,30 +8,43 @@
 
 <h2>@(Model.Id == 0 ? "Agregar" : "Editar") Producto</h2>
 
-
-@using (Html.BeginForm("Save", "Products", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-{
-    <div class="form-group">
-        @Html.LabelFor(p => p.Name)
-        @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.Name)
-
-        @Html.LabelFor(p => p.UnitsNeeded)
-        @Html.TextBoxFor(p => p.UnitsNeeded, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.UnitsNeeded)
-
-        <label class="btn btn-info">
-            Escoger Imagen <input id="fileInput" type="file" style="display: none;" name="productImage">
-        </label>
-        <span id="fileNameText">No has seleccionado ningún archivo</span>
-        <br />
-        
-        @Html.HiddenFor(p => p.Id)
-        @Html.HiddenFor(p => p.UnitsInStock)
-
-        <button disabled="@(Model.Id == 0)" id="submitButton" type="submit" class="btn btn-primary">@(Model.Id == 0 ? "Agregar" : "Editar")</button>
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm("Save", "Products", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(p => p.Name)
+                @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(p => p.UnitsNeeded)
+                @Html.TextBoxFor(p => p.UnitsNeeded, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.UnitsNeeded)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(p => p.UnitsInStock)
+                @Html.TextBoxFor(p => p.UnitsInStock, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.UnitsInStock)
+            </div>
+            <div class="form-group">
+                <label class="btn btn-info">
+                    Escoger Imagen <input id="fileInput" type="file" style="display: none;" name="productImage">
+                </label>
+                <span id="fileNameText">No has seleccionado ningún archivo</span>
+            </div>
+            @Html.HiddenFor(p => p.Id)
+            @Html.AntiForgeryToken()
+            <div class="btn-group">
+                @if (Model.Id != 0)
+                {
+                    @Html.ActionLink("Borrar Producto", "Delete", new { @id = Model.Id }, new { @class = "btn btn-danger" })
+                }
+                <button disabled="@(Model.Id == 0)" id="submitButton" type="submit" class="btn btn-primary">@(Model.Id == 0 ? "Agregar Producto" : "Editar Producto")</button>
+            </div>
+        }
     </div>
-}
+</div>
 
 @section scripts
 {
