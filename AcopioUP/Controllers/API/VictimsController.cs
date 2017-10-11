@@ -19,63 +19,67 @@ namespace AcopioUP.Controllers.API
         }
 
         // GET /api/victims
-        public IEnumerable<Victim> GetVictims()
+        public IHttpActionResult GetVictims()
         {
-            return _context.Victims.ToList();
+            return Ok(_context.Victims.ToList());
         }
 
         // GET /api/victims/{id}
-        public Victim GetVictim(int id)
+        public IHttpActionResult GetVictim(int id)
         {
             var victim = _context.Victims.SingleOrDefault(v => v.Id == id);
-            if(victim == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            if (victim == null)
+                return NotFound();
 
-            return victim;
+            return Ok(victim);
         }
 
         // POST api/victims
         [HttpPost]
-        public Victim CreateVictim(Victim victim) //TODO: Create DTO  
+        public IHttpActionResult CreateVictim(Victim victim) //TODO: Create DTO  
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             _context.Victims.Add(victim);
             _context.SaveChanges();
-            return victim;
+            return Created(new Uri($"{Request.RequestUri}/{victim.Id}"), victim);
         }
 
         //PUT api/victims/{id}
         [HttpPut]
-        public void UpdateVictim(int id, Victim victim) //TODO: Create DTO and use automapper
+        public IHttpActionResult UpdateVictim(int id, Victim victim) //TODO: Create DTO and use automapper
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var victimInDb = _context.Victims.SingleOrDefault(v => v.Id == id);
 
             if (victimInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             victimInDb.FirstName = victim.FirstName;
             victimInDb.LastName = victim.LastName;
             victimInDb.Email = victim.Email;
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
         // DELETE /api/victim/{id}
         [HttpDelete]
-        public void DeleteVictim(int id)
+        public IHttpActionResult DeleteVictim(int id)
         {
             var victimInDb = _context.Victims.SingleOrDefault(v => v.Id == id);
 
-            if(victimInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            if (victimInDb == null)
+                return NotFound();
 
             _context.Victims.Remove(victimInDb);
             _context.SaveChanges();
+
+            return Ok();
         }
 
     }
