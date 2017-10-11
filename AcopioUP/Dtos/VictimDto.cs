@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace AcopioUP.Models
+namespace AcopioUP.Dtos
 {
-    public class Victim
+    public class VictimDto
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -22,7 +21,6 @@ namespace AcopioUP.Models
         [Required]
         [StringLength(255)]
         public string Email { get; set; }
-
         public string FullName => $"{FirstName} {LastName}";
     }
 }

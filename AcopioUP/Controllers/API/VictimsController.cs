@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AcopioUP.Dtos;
 using AcopioUP.Models;
+using AutoMapper;
 
 namespace AcopioUP.Controllers.API
 {
@@ -21,7 +23,7 @@ namespace AcopioUP.Controllers.API
         // GET /api/victims
         public IHttpActionResult GetVictims()
         {
-            return Ok(_context.Victims.ToList());
+            return Ok(_context.Victims.ToList().Select(Mapper.Map<Victim, VictimDto>));
         }
 
         // GET /api/victims/{id}
@@ -31,24 +33,27 @@ namespace AcopioUP.Controllers.API
             if (victim == null)
                 return NotFound();
 
-            return Ok(victim);
+            return Ok(Mapper.Map<Victim, VictimDto>(victim));
         }
 
         // POST api/victims
         [HttpPost]
-        public IHttpActionResult CreateVictim(Victim victim) //TODO: Create DTO  
+        public IHttpActionResult CreateVictim(VictimDto victimDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            var victim = Mapper.Map<VictimDto, Victim>(victimDto);
+
             _context.Victims.Add(victim);
             _context.SaveChanges();
-            return Created(new Uri($"{Request.RequestUri}/{victim.Id}"), victim);
+            victimDto.Id = victim.Id;
+            return Created(new Uri($"{Request.RequestUri}/{victimDto.Id}"), victimDto);
         }
 
         //PUT api/victims/{id}
         [HttpPut]
-        public IHttpActionResult UpdateVictim(int id, Victim victim) //TODO: Create DTO and use automapper
+        public IHttpActionResult UpdateVictim(int id, VictimDto victimDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -58,9 +63,8 @@ namespace AcopioUP.Controllers.API
             if (victimInDb == null)
                 return NotFound();
 
-            victimInDb.FirstName = victim.FirstName;
-            victimInDb.LastName = victim.LastName;
-            victimInDb.Email = victim.Email;
+            //victimDto.Id = id; //I know... but If "Id" in victimDto is changed (i.e. not sent), an exception is thrown
+            Mapper.Map(victimDto, victimInDb); 
 
             _context.SaveChanges();
 

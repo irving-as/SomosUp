@@ -7,11 +7,14 @@
 
 <h2>Víctimas</h2>
 
+<p>
+    @Html.ActionLink("Nueva Víctima", "New", "Victims", null, new { @class = "btn btn-primary" })
+</p>
+
 <table id="victims" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Apellidos</th>
             <th>Email</th>
             <th>Eliminar</th>
         </tr>
@@ -30,27 +33,21 @@
                 },
                 columns: [
                     {
-                        data: "firstName",
+                        data: "fullName",
                         render: function (data, type, victim) {
-                            return "<a href='/victims/edit/" + victim.id + "'>" + victim.firstName + "</a>";
-                        }
-                    },
-                    {
-                        data: "lastName",
-                        render: function (data, type, victim) {
-                            return "<a href='/victims/edit/" + victim.id + "'>" + victim.lastName + "</a>";
+                            return "<a href='/victims/edit/" + victim.id + "'>" + victim.fullName + "</a>";
                         }
                     },
                     {
                         data: "email",
-                        render: function(data, type, victim) {
+                        render: function (data, type, victim) {
                             return "<a href='/victims/edit/" + victim.id + "'>" + victim.email + "</a>";
                         }
                     },
                     {
                         data: "id",
-                        render: function(data) {
-                            return "<button class='btn-link js-delete' data-victim-id=" + data + ">Delete</button>";
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-victim-id=" + data + ">Eliminar</button>";
                         }
                     }
 
@@ -59,7 +56,7 @@
 
             $("#victims").on("click", ".js-delete", function () {
                 var button = $(this);
-                bootbox.confirm("Estas seguro que quieres eliminar esta victima?", function(result) {
+                bootbox.confirm("Estas seguro que quieres eliminar esta victima?", function (result) {
                     if (result) {
                         $.ajax({
                             url: "/api/victims/" + button.attr("data-victim-id"),
