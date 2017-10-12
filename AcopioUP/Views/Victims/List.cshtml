@@ -35,19 +35,19 @@
                     {
                         data: "fullName",
                         render: function (data, type, victim) {
-                            return "<a href='/victims/edit/" + victim.id + "'>" + victim.fullName + "</a>";
+                            return "<a href='/victims/edit/" + victim.id + "' style='display: block;' class='list- group - item list- group - item - action' >" + victim.fullName + "</a>";
                         }
                     },
                     {
                         data: "email",
                         render: function (data, type, victim) {
-                            return "<a href='/victims/edit/" + victim.id + "'>" + victim.email + "</a>";
+                            return "<a href='/victims/edit/" + victim.id + "'style='display: block;'>" + victim.email + "</a>";
                         }
                     },
                     {
                         data: "id",
                         render: function (data) {
-                            return "<button class='btn-link js-delete' data-victim-id=" + data + ">Eliminar</button>";
+                            return "<button class='btn-danger js-delete' data-victim-id=" + data + "style='display: block;'>Eliminar</button>";
                         }
                     }
 
