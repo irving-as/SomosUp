@@ -15,16 +15,30 @@
 <ul class="list-group">
     @foreach (var product in Model)
     {
+        var isProductStockComplete = product.UnitsNeeded == product.UnitsInStock;
         <li class="list-group-item">
             <div class="media">
                 <div class="media-left media-middle">
                     <img src="/Content/Images/Products/@product.ImgSrc" class="media-object" style="width: 60px" alt="@product.Name" />
                 </div>
                 <div class="media-body">
-                    <h3>@product.Name</h3>
+                    @if (isProductStockComplete)
+                    {
+                        <h3 style="color: gray">
+                            @product.Name <strong style="color: #5cb85c;">¡Completado!</strong>
+                        </h3>
+                    }
+                    else
+                    {
+                        <h3>
+                            @product.Name
+                        </h3>
+                    }
+
+
                     @Html.ActionLink("Editar", "Edit", new { @id = product.Id }, new { @style = "display: block;" })
                     <div class="progress">
-                        <div class="progress-bar progress-bar progress-bar-striped" role="progressbar"
+                        <div class="progress-bar progress-bar-striped @(isProductStockComplete ? "progress-bar-success" : "")" role="progressbar"
                              aria-valuenow="@product.UnitsInStock" aria-valuemin="0" aria-valuemax="@product.UnitsNeeded" style="width: @(100 * product.UnitsInStock / product.UnitsNeeded)%">
                         </div>
                     </div>

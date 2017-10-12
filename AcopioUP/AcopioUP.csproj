@@ -234,12 +234,17 @@
     <Compile Include="Migrations\201710101851011_VictimModelAdded.Designer.cs">
       <DependentUpon>201710101851011_VictimModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710120425053_SeedUsers.cs" />
+    <Compile Include="Migrations\201710120425053_SeedUsers.Designer.cs">
+      <DependentUpon>201710120425053_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\RoleNames.cs" />
     <Compile Include="Models\Victim.cs" />
     <Compile Include="Models\StockLessThanOrEqualThanNeeded.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -562,8 +567,9 @@
     <Content Include="Views\Victims\ReadOnlyList.cshtml" />
     <Content Include="Views\Victims\List.cshtml" />
     <Content Include="Views\Victims\VictimForm.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Products\ProductForm.cshtml" />
+    <Content Include="Views\Products\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -584,6 +590,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710101851011_VictimModelAdded.resx">
       <DependentUpon>201710101851011_VictimModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710120425053_SeedUsers.resx">
+      <DependentUpon>201710120425053_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

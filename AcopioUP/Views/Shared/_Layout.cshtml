@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AcopioUP.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,7 +24,10 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                 <li>@Html.ActionLink("Donar", "Index", "Products")</li>
-                <li>@Html.ActionLink("Víctimas", "Index", "Victims")</li>
+                @if (User.IsInRole(RoleNames.CanManageVictims))
+                {
+                    <li>@Html.ActionLink("Víctimas", "Index", "Victims")</li>
+                }
                 <li>@Html.ActionLink("Más Información", "About", "Home")</li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
             </ul>
