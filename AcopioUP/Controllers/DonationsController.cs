@@ -10,37 +10,70 @@ namespace AcopioUP.Controllers
 {
     public class DonationsController : Controller
     {
+
+        private readonly ApplicationDbContext _context;
+
+        public DonationsController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
         // GET: Donations
+        [Authorize(Roles = RoleNames.CanManageProducts)] //I pressume anyone who manages products can manage donations but it would be nice if there is a role for Collection Centers as well
         public ActionResult Index()
         {
 
-            var viewModel = new DonationFormViewModel();
+            //TODO: Change this code and show a list of the donations made in the current Collection Center
+
+            var products = _context.Products.ToList();
+
+            var viewModel = new DonationFormViewModel
+            {
+                Products = products,
+                Date = DateTime.Now
+            };
+
+            return View("DonationForm", viewModel);
+        }
+
+        [Authorize(Roles = RoleNames.CanManageProducts)] //Same goes here...
+        public ActionResult New()
+        {
+            var products = _context.Products.ToList();
+
+            var viewModel = new DonationFormViewModel
+            {
+                Products = products,
+                Date = DateTime.Now
+            };
+
             return View("DonationForm", viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.CanManageProducts)] //Same goes here...
         public ActionResult Save(Donation donation)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new DonationFormViewModel();
+                var viewModel = new DonationFormViewModel
+                {
+                    Products = _context.Products.ToList(),
+                    Date = DateTime.Now
+                };
                 return View("DonationForm", viewModel);
             }
-            return View("DonationForm");
-            //if (donation.Id == 0)
-            //{
-            //    _context.Victims.Add(victim);
-            //}
-            //else
-            //{
-            //    var victimInDb = _context.Victims.Single(v => v.Id == victim.Id);
-            //    victimInDb.FirstName = victim.FirstName;
-            //    victimInDb.LastName = victim.LastName;
-            //    victimInDb.Email = victim.Email;
-            //}
-            //_context.SaveChanges();
-            //return RedirectToAction("Index", "Victims");
+
+            var productInDb = _context.Products.SingleOrDefault(p => p.Id == donation.ProductId);
+            if (productInDb != null)
+            {
+                productInDb.UnitsInStock += donation.Units;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Products");
+
         }
     }
 }

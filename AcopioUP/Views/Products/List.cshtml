@@ -6,6 +6,7 @@
 <h2>Productos Necesarios</h2>
 
 @Html.ActionLink("Agregar Nuevo Producto", "New", null, new { @class = "btn btn-primary", @style = "margin-bottom: 10px" })
+@Html.ActionLink("Agregar Donación", "New", "Donations", null, new { @class = "btn btn-primary", @style = "margin-bottom: 10px" })
 
 @if (!Model.Any())
 {

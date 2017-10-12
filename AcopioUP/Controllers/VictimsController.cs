@@ -18,13 +18,19 @@ namespace AcopioUP.Controllers
         {
             _context = new ApplicationDbContext();
         }
+
         // GET: Victims
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            //return View("ReadOnlyList"); //TODO: Make an if statement to return this View if the request come from a guest
-            return View("List");
+            if(User.IsInRole(RoleNames.CanManageVictims))
+                return View("List");
+            
+            return View("ReadOnlyList");
+
         }
 
+        [Authorize(Roles = RoleNames.CanManageVictims)]
         public ActionResult New()
         {
             var viewModel = new VictimFormViewModel();
@@ -32,6 +38,7 @@ namespace AcopioUP.Controllers
             return View("VictimForm", viewModel);
         }
 
+        [Authorize(Roles = RoleNames.CanManageVictims)]
         public ActionResult Edit(int id)
         {
             var victim = _context.Victims.SingleOrDefault(v => v.Id == id);
@@ -45,6 +52,7 @@ namespace AcopioUP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.CanManageVictims)]
         public ActionResult Save(Victim victim)
         {
             if (!ModelState.IsValid)
