@@ -413,6 +413,9 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Images\banner01.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\SimpleStyleSite.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -570,6 +573,7 @@
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Products\ProductForm.cshtml" />
     <Content Include="Views\Products\ReadOnlyList.cshtml" />
+    <Content Include="Views\Shared\_SimpleLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

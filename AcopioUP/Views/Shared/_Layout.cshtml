@@ -7,43 +7,47 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink("Acopio Up", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <a href="/home" class="masthead-brand"><img src="/Content/Images/logo.png" alt="Universidad Panamericana" width="200" /></a>
+                    <nav>
+                        <ul class="nav masthead-nav">
+                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Donar", "Index", "Products")</li>
+                            @if (User.IsInRole(RoleNames.CanManageVictims))
+                            {
+                                <li>@Html.ActionLink("Víctimas", "Index", "Victims")</li>
+                            }
+                            <li>@Html.ActionLink("Info", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            @RenderBody()
+
+            <div class="mastfoot">
+                <div class="inner">
+                    <p>© Copyright <a href="http://up.edu.mx">Universidad Panamericana</a>. Todos los derechos reservados.</p>
+                </div>
+            </div>
+
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                <li>@Html.ActionLink("Donar", "Index", "Products")</li>
-                @if (User.IsInRole(RoleNames.CanManageVictims))
-                {
-                    <li>@Html.ActionLink("Víctimas", "Index", "Victims")</li>
-                }
-                <li>@Html.ActionLink("Más Información", "About", "Home")</li>
-                <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
+
     </div>
-</div>
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
+
 </div>
 
-    @Scripts.Render("~/bundles/lib")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/lib")
+@RenderSection("scripts", required: false)
 </body>
 </html>
