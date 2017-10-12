@@ -1,0 +1,37 @@
+﻿@model AcopioUP.ViewModels.DonationFormViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>Donación</h2>
+
+@using (Html.BeginForm("Save", "Donations"))
+{
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(v => v.Units)
+            <input id="colorful" class="form-control" type="number" value="1" min="1" max="10" style="text-align: center;">
+            @Html.ValidationMessageFor(m => m.Units)
+        </div>
+    </div>
+
+    //@Html.HiddenFor(m => m.ProductId)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Guardar</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/bootstrap-number-input.js")
+    <script>
+
+        $('#colorful').bootstrapNumber({
+            // default, danger, success , warning, info, primary
+            upClass: 'success',
+            downClass: 'danger',
+            center: true
+        });
+    </script>
+
+}
