@@ -9,6 +9,7 @@ using AcopioUP.ViewModels;
 
 namespace AcopioUP.Controllers
 {
+    [Authorize(Roles = RoleNames.CanManageVictims)]
     public class VictimsController : Controller
     {
         private readonly ApplicationDbContext _context;

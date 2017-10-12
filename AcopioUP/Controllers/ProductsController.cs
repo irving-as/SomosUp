@@ -24,12 +24,17 @@ namespace AcopioUP.Controllers
         }
 
         // GET: Products
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var products = _context.Products;
-            return View(products);
+            if (User.IsInRole(RoleNames.CanManageProducts))
+                return View("List", products);
+
+            return View("ReadOnlyList", products);
         }
 
+        [Authorize(Roles = RoleNames.CanManageProducts)]
         public ActionResult New()
         {
             var productDto = new ProductDto
@@ -40,6 +45,7 @@ namespace AcopioUP.Controllers
             return View("ProductForm", productDto);
         }
 
+        [Authorize(Roles = RoleNames.CanManageProducts)]
         public ActionResult Edit(int id)
         {
             var productInDb = _context.Products.SingleOrDefault(p => p.Id == id);
@@ -50,6 +56,7 @@ namespace AcopioUP.Controllers
             return View("ProductForm", Mapper.Map<ProductDto>(productInDb));
         }
 
+        [Authorize(Roles = RoleNames.CanManageProducts)]
         public ActionResult Delete(int id)
         {
             var productInDb = _context.Products.SingleOrDefault(p => p.Id == id);
@@ -67,6 +74,7 @@ namespace AcopioUP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.CanManageProducts)]
         public ActionResult Save(ProductDto productDto)
         {
             var productImage = Request.Files["productImage"];

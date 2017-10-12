@@ -1,0 +1,46 @@
+﻿@model System.Data.Entity.DbSet<AcopioUP.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Productos Necesarios</h2>
+
+@if (!Model.Any())
+{
+    <p>No hay productos agregados aún.</p>
+}
+<ul class="list-group">
+    @foreach (var product in Model)
+    {
+        var isProductStockComplete = product.UnitsNeeded == product.UnitsInStock;
+        <li class="list-group-item">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <img src="/Content/Images/Products/@product.ImgSrc" class="media-object" style="width: 60px" alt="@product.Name" />
+                </div>
+                <div class="media-body">
+                    @if (isProductStockComplete)
+                    {
+                        <h3 style="color: gray">
+                            @product.Name <strong style="color: #5cb85c;">¡Completado!</strong>
+                        </h3>
+                    }
+                    else
+                    {
+                        <h3>
+                            @product.Name
+                        </h3>
+                    }
+
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped @(isProductStockComplete ? "progress-bar-success" : "")" role="progressbar"
+                             aria-valuenow="@product.UnitsInStock" aria-valuemin="0" aria-valuemax="@product.UnitsNeeded" style="width: @(100 * product.UnitsInStock / product.UnitsNeeded)%">
+                        </div>
+                    </div>
+                    <p>@product.UnitsInStock de @product.UnitsNeeded</p>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
