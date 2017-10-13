@@ -6,23 +6,21 @@ using System.Web;
 
 namespace AcopioUP.Models
 {
-    public class CollectionCenter
+    public class Address
     {
         public int Id { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string Name { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string Address { get; set; }
+        public string StreetAddress { get; set; }
 
         public double Lat { get; set; }
 
         public double Long { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string UserId { get; set; }
 
     }
 }

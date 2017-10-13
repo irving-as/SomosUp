@@ -8,6 +8,7 @@ using AcopioUP.ViewModels;
 
 namespace AcopioUP.Controllers
 {
+    [Authorize(Roles = RoleNames.CanManageProducts)] //I pressume anyone who manages products can manage donations but it would be nice if there is a role for Collection Centers as well
     public class DonationsController : Controller
     {
 
@@ -24,7 +25,6 @@ namespace AcopioUP.Controllers
         }
 
         // GET: Donations
-        [Authorize(Roles = RoleNames.CanManageProducts)] //I pressume anyone who manages products can manage donations but it would be nice if there is a role for Collection Centers as well
         public ActionResult Index()
         {
 
@@ -41,7 +41,6 @@ namespace AcopioUP.Controllers
             return View("DonationForm", viewModel);
         }
 
-        [Authorize(Roles = RoleNames.CanManageProducts)] //Same goes here...
         public ActionResult New()
         {
             var products = _context.Products.ToList();
@@ -57,7 +56,6 @@ namespace AcopioUP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = RoleNames.CanManageProducts)] //Same goes here...
         public ActionResult Save(Donation donation)
         {
             if (!ModelState.IsValid)

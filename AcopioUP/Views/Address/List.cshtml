@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AcopioUP.Models.Address>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Direcciones</h2>
+
+@if (!Model.Any())
+{
+    <p>No hay Centros de acopio agregados aun</p>
+}
+<p>
+    @Html.ActionLink("Agregar Dirección", "New", "Address", null, new { @class = "btn btn-primary", @style = "margin-bottom: 10px" })
+</p>
+
+<table id="collection-centers" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Dirección</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var collector in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(collector.StreetAddress, "Edit", "Address", new { @id = collector.Id }, new { @style = "display: block;" })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#collection-centers").dataTable();
+        });
+    </script>
+}

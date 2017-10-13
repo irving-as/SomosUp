@@ -12,7 +12,7 @@ namespace AcopioUP.Models
 
         public int ProductId { get; set; }
 
-        public int CollectionCenterId { get; set; }
+        public string UserId { get; set; }
 
         public int Units { get; set; }
 
