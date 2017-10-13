@@ -9,6 +9,8 @@ namespace AcopioUP.Models
 
         public DbSet<Victim> Victims { get; set; }
 
+        public DbSet<CollectionCenter> CollectionCenters { get; set; }
+
         //public DbSet<Donation> Donations { get; set; } TODO: Uncomment when CollectionCenter Model is added
 
         public ApplicationDbContext()
