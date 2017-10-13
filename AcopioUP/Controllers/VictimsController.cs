@@ -19,18 +19,23 @@ namespace AcopioUP.Controllers
             _context = new ApplicationDbContext();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         // GET: Victims
         [AllowAnonymous]
         public ActionResult Index()
         {
-            if(User.IsInRole(RoleNames.CanManageVictims))
-                return View("List");
-            
-            return View("ReadOnlyList");
+            var victims = _context.Victims.ToList();
+            if (User.IsInRole(RoleNames.CanManageVictims))
+                return View("List", victims);
+
+            return View("ReadOnlyList", victims);
 
         }
 
-        [Authorize(Roles = RoleNames.CanManageVictims)]
         public ActionResult New()
         {
             var viewModel = new VictimFormViewModel();
@@ -38,7 +43,6 @@ namespace AcopioUP.Controllers
             return View("VictimForm", viewModel);
         }
 
-        [Authorize(Roles = RoleNames.CanManageVictims)]
         public ActionResult Edit(int id)
         {
             var victim = _context.Victims.SingleOrDefault(v => v.Id == id);
@@ -52,7 +56,6 @@ namespace AcopioUP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = RoleNames.CanManageVictims)]
         public ActionResult Save(Victim victim)
         {
             if (!ModelState.IsValid)
@@ -73,7 +76,20 @@ namespace AcopioUP.Controllers
                 victimInDb.Email = victim.Email;
             }
             _context.SaveChanges();
-            return RedirectToAction("Index", "Victims");
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var victimInDb = _context.Victims.SingleOrDefault(v => v.Id == id);
+
+            if (victimInDb == null)
+                return HttpNotFound();
+
+            _context.Victims.Remove(victimInDb);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }

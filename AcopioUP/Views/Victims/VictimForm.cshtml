@@ -8,13 +8,13 @@
 @using (Html.BeginForm("Save", "Victims"))
 {
     <div class="form-group">
-        @Html.LabelFor(v=>v.FirstName)
-        @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})
+        @Html.LabelFor(v => v.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.FirstName)
     </div>
     <div class="form-group">
-        @Html.LabelFor(v=>v.LastName)
-        @Html.TextBoxFor(m => m.LastName, new {@class = "form-control"})
+        @Html.LabelFor(v => v.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.LastName)
     </div>
     <div class="form-group">
@@ -22,13 +22,48 @@
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Email)
     </div>
-    
+
     @Html.HiddenFor(m => m.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Guardar</button>
+    if (Model.Id != 0)
+    {
+        <button type="button" id="delete" class="btn btn-danger">Eliminar</button>
+    }
 }
 
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            $("#delete").on("click", function () {
+                var button = $(this);
+
+                bootbox.confirm({
+                    title: '¡Cuidado!',
+                    message: '¿Estás seguro que quieres eliminar este damnificado?',
+                    buttons: {
+                        'cancel': {
+                            label: 'Cancelar',
+                            className: 'btn-default pull-left'
+                        },
+                        'confirm': {
+                            label: 'Eliminar',
+                            className: 'btn-danger pull-right'
+                        }
+                    },
+                    callback: function(result) {
+                        if (result) {
+                            window.location.href = "/victims/delete/@Model.Id";
+                        }
+                    }
+                });
+
+                });
+            });
+    </script>
+
 }

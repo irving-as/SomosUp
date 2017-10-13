@@ -4,7 +4,7 @@
     ViewBag.Title = "ReadOnlyList";
 }
 
-<h2>Víctimas</h2>
+<h2>Damnificados</h2>
 
 <table id="victims" class="table table-bordered table-hover">
     <thead>
@@ -14,7 +14,17 @@
     </tr>
     </thead>
     <tbody>
-    
+    @foreach (var victim in Model)
+    {
+        <tr>
+            <td>
+                @victim.FullName
+            </td>
+            <td>
+                @victim.Email
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
 
@@ -22,21 +32,7 @@
 {
     <script>
         $(document).ready(function() {
-            var table = $("#victims").DataTable({
-                ajax: {
-                    url: "/api/victims",
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "fullName"
-                    },
-                    {
-                        data: "email"
-                    }
-                ]
-            });
-
+            $("#victims").DataTable();
         });
     </script>
 }

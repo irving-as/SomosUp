@@ -18,6 +18,11 @@ namespace AcopioUP.Controllers
             _context = new ApplicationDbContext();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         // GET: Donations
         [Authorize(Roles = RoleNames.CanManageProducts)] //I pressume anyone who manages products can manage donations but it would be nice if there is a role for Collection Centers as well
         public ActionResult Index()

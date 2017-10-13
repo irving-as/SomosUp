@@ -26,7 +26,7 @@ namespace AcopioUP.ViewModels
         [StringLength(255)]
         public string Email { get; set; }
 
-        public string Title => Id != 0 ? "Editar Víctima" : "Nueva Víctima";
+        public string Title => Id != 0 ? "Editar Damnificado" : "Nuevo Damnificado";
 
         public VictimFormViewModel()
         {

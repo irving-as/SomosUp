@@ -4,10 +4,10 @@
     ViewBag.Title = "ReadOnlyList";
 }
 
-<h2>Víctimas</h2>
+<h2>Damnificados</h2>
 
 <p>
-    @Html.ActionLink("Nueva Víctima", "New", "Victims", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Nuevo Damnificado", "New", "Victims", null, new { @class = "btn btn-primary" })
 </p>
 
 <table id="victims" class="table table-bordered table-hover">
@@ -15,58 +15,28 @@
         <tr>
             <th>Nombre</th>
             <th>Email</th>
-            <th>Eliminar</th>
         </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+    @foreach (var victim in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(victim.FullName,"Edit","Victims",new { @id=victim.Id }, new { @style= "display: block;" } )
+            </td>
+            <td>
+                @Html.ActionLink(victim.Email, "Edit", "Victims", new { @id = victim.Id }, new { @style = "display: block;" })
+            </td>
+        </tr>
+    }
+    </tbody>
 </table>
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
-            var table = $("#victims").DataTable({
-                ajax: {
-                    url: "/api/victims",
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "fullName",
-                        render: function (data, type, victim) {
-                            return "<a href='/victims/edit/" + victim.id + "' style='display: block;' class='list- group - item list- group - item - action' >" + victim.fullName + "</a>";
-                        }
-                    },
-                    {
-                        data: "email",
-                        render: function (data, type, victim) {
-                            return "<a href='/victims/edit/" + victim.id + "'style='display: block;'>" + victim.email + "</a>";
-                        }
-                    },
-                    {
-                        data: "id",
-                        render: function (data) {
-                            return "<button class='btn btn-danger js-delete' data-victim-id=" + data + "style='display: block;'>Eliminar</button>";
-                        }
-                    }
-
-                ]
-            });
-
-            $("#victims").on("click", ".js-delete", function () {
-                var button = $(this);
-                bootbox.confirm("Estas seguro que quieres eliminar esta victima?", function (result) {
-                    if (result) {
-                        $.ajax({
-                            url: "/api/victims/" + button.attr("data-victim-id"),
-                            method: "DELETE",
-                            success: function () {
-                                table.row(button.parents("tr")).remove().draw();
-                            }
-                        });
-                    }
-                });
-            });
+            $("#victims").dataTable();
         });
     </script>
 }
