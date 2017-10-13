@@ -137,7 +137,7 @@ namespace AcopioUP.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = RoleNames.CanCreateAccounts)]
         public ActionResult Register()
         {
             return View();
@@ -146,17 +146,20 @@ namespace AcopioUP.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.CanCreateAccounts)]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = new Address { StreetAddress = model.StreetAddress, Lat = model.Lat, Long = model.Long } };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await UserManager.AddToRoleAsync(user.Id, RoleNames.CanManageDonations);
+
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //TODO: Redirect to a page that shows a success message and also displays information about the collection centers.
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

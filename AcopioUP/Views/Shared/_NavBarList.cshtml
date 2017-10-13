@@ -1,0 +1,16 @@
+﻿@using AcopioUP.Models
+<li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+@if (User.IsInRole(RoleNames.CanManageDonations))
+{
+    <li>@Html.ActionLink("Donativos", "Index", "Donations")</li>
+}
+else
+{
+    <li>@Html.ActionLink("Donar", "Index", "Products")</li>
+}
+@if (User.IsInRole(RoleNames.CanManageVictims))
+{
+    <li>@Html.ActionLink("Damnificados", "Index", "Victims")</li>
+}
+<li>@Html.ActionLink("Info", "About", "Home")</li>
+<li>@Html.ActionLink("Contacto", "Contact", "Home")</li>

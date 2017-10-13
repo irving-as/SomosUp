@@ -208,7 +208,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CollectionCentersController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -243,11 +243,39 @@
     <Compile Include="Migrations\201710130211017_AddedCollectionCentersModel.Designer.cs">
       <DependentUpon>201710130211017_AddedCollectionCentersModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710131911183_ReplaceCollectionCenterWithAddress.cs" />
+    <Compile Include="Migrations\201710131911183_ReplaceCollectionCenterWithAddress.Designer.cs">
+      <DependentUpon>201710131911183_ReplaceCollectionCenterWithAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131936171_AddDonations.cs" />
+    <Compile Include="Migrations\201710131936171_AddDonations.Designer.cs">
+      <DependentUpon>201710131936171_AddDonations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131937492_AddAddressToUsers.cs" />
+    <Compile Include="Migrations\201710131937492_AddAddressToUsers.Designer.cs">
+      <DependentUpon>201710131937492_AddAddressToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131942358_AddListOfDonationsToUsers.cs" />
+    <Compile Include="Migrations\201710131942358_AddListOfDonationsToUsers.Designer.cs">
+      <DependentUpon>201710131942358_AddListOfDonationsToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710132050241_RemoveUserIdFromAddress.cs" />
+    <Compile Include="Migrations\201710132050241_RemoveUserIdFromAddress.Designer.cs">
+      <DependentUpon>201710132050241_RemoveUserIdFromAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710132148445_AddNewRoles.cs" />
+    <Compile Include="Migrations\201710132148445_AddNewRoles.Designer.cs">
+      <DependentUpon>201710132148445_AddNewRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.cs" />
+    <Compile Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.Designer.cs">
+      <DependentUpon>201710132317517_AddCanCreateAccountsRoleToAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\CollectionCenter.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
@@ -256,7 +284,7 @@
     <Compile Include="Models\StockLessThanOrEqualThanNeeded.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\CollectionCenterFormViewModel.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\DonationFormViewModel.cs" />
     <Compile Include="ViewModels\VictimFormViewModel.cs" />
   </ItemGroup>
@@ -592,8 +620,9 @@
     <Content Include="Views\Products\ReadOnlyList.cshtml" />
     <Content Include="Views\Shared\_SimpleLayout.cshtml" />
     <Content Include="Views\Donations\DonationForm.cshtml" />
-    <Content Include="Views\CollectionCenters\List.cshtml" />
-    <Content Include="Views\CollectionCenters\CollectionCenterForm.cshtml" />
+    <Content Include="Views\Address\List.cshtml" />
+    <Content Include="Views\Address\AddressForm.cshtml" />
+    <Content Include="Views\Shared\_NavBarList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -620,6 +649,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710130211017_AddedCollectionCentersModel.resx">
       <DependentUpon>201710130211017_AddedCollectionCentersModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131911183_ReplaceCollectionCenterWithAddress.resx">
+      <DependentUpon>201710131911183_ReplaceCollectionCenterWithAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131936171_AddDonations.resx">
+      <DependentUpon>201710131936171_AddDonations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131937492_AddAddressToUsers.resx">
+      <DependentUpon>201710131937492_AddAddressToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131942358_AddListOfDonationsToUsers.resx">
+      <DependentUpon>201710131942358_AddListOfDonationsToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132050241_RemoveUserIdFromAddress.resx">
+      <DependentUpon>201710132050241_RemoveUserIdFromAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132148445_AddNewRoles.resx">
+      <DependentUpon>201710132148445_AddNewRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.resx">
+      <DependentUpon>201710132317517_AddCanCreateAccountsRoleToAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

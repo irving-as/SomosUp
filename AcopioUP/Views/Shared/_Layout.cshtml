@@ -20,14 +20,7 @@
                     <a href="/home" class="masthead-brand"><img src="/Content/Images/logo.png" alt="Universidad Panamericana" width="200" /></a>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Donar", "Index", "Products")</li>
-                            @if (User.IsInRole(RoleNames.CanManageVictims))
-                            {
-                                <li>@Html.ActionLink("Damnificados", "Index", "Victims")</li>
-                            }
-                            <li>@Html.ActionLink("Info", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                            @Html.Partial("_NavBarList")
                         </ul>
                     </nav>
                 </div>
