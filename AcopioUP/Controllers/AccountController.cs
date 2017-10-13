@@ -137,7 +137,7 @@ namespace AcopioUP.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = RoleNames.CanCreateAccounts)]
         public ActionResult Register()
         {
             return View();
@@ -146,8 +146,8 @@ namespace AcopioUP.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.CanCreateAccounts)]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -156,6 +156,8 @@ namespace AcopioUP.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, RoleNames.CanManageDonations);
+
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     //TODO: Redirect to a page that shows a success message and also displays information about the collection centers.
 

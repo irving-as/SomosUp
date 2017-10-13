@@ -8,7 +8,7 @@ using AcopioUP.ViewModels;
 
 namespace AcopioUP.Controllers
 {
-    [Authorize(Roles = RoleNames.CanManageProducts)] //I pressume anyone who manages products can manage donations but it would be nice if there is a role for Collection Centers as well
+    [Authorize(Roles = RoleNames.CanManageDonations)]
     public class DonationsController : Controller
     {
 

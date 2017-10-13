@@ -263,6 +263,14 @@
     <Compile Include="Migrations\201710132050241_RemoveUserIdFromAddress.Designer.cs">
       <DependentUpon>201710132050241_RemoveUserIdFromAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710132148445_AddNewRoles.cs" />
+    <Compile Include="Migrations\201710132148445_AddNewRoles.Designer.cs">
+      <DependentUpon>201710132148445_AddNewRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.cs" />
+    <Compile Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.Designer.cs">
+      <DependentUpon>201710132317517_AddCanCreateAccountsRoleToAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -614,6 +622,7 @@
     <Content Include="Views\Donations\DonationForm.cshtml" />
     <Content Include="Views\Address\List.cshtml" />
     <Content Include="Views\Address\AddressForm.cshtml" />
+    <Content Include="Views\Shared\_NavBarList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -655,6 +664,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710132050241_RemoveUserIdFromAddress.resx">
       <DependentUpon>201710132050241_RemoveUserIdFromAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132148445_AddNewRoles.resx">
+      <DependentUpon>201710132148445_AddNewRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.resx">
+      <DependentUpon>201710132317517_AddCanCreateAccountsRoleToAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
