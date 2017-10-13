@@ -18,9 +18,5 @@ namespace AcopioUP.Models
 
         public double Long { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string UserId { get; set; }
-
     }
 }

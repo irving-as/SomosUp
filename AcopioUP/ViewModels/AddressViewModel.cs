@@ -12,7 +12,6 @@ namespace AcopioUP.ViewModels
             StreetAddress = address.StreetAddress;
             Lat = address.Lat;
             Long = address.Long;
-            UserId = address.UserId;
         }
 
         public AddressViewModel()
@@ -30,10 +29,6 @@ namespace AcopioUP.ViewModels
         public double Lat { get; set; }
 
         public double Long { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string UserId { get; set; }
 
         public string Title => Id == 0 ? "Nueva dirección" : "Editar dirección";
 

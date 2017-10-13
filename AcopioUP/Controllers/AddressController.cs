@@ -64,7 +64,6 @@ namespace AcopioUP.Controllers
                 addressInDb.StreetAddress = address.StreetAddress;
                 addressInDb.Lat = address.Lat;
                 addressInDb.Long = address.Long;
-                addressInDb.UserId = address.UserId;
             }
             _context.SaveChanges();
 
