@@ -5,6 +5,7 @@ using AcopioUP.ViewModels;
 
 namespace AcopioUP.Controllers
 {
+    [Authorize(Roles = RoleNames.CanCreateAccounts)]
     public class AddressController : Controller
     {
 
@@ -21,12 +22,13 @@ namespace AcopioUP.Controllers
         }
 
         // GET: Address
+        [AllowAnonymous]
         public ActionResult Index()
         {
-
             var addresses = _context.Addresses.ToList();
-
-            return View("List", addresses);
+            if (User.IsInRole(RoleNames.CanCreateAccounts))
+                return View("List", addresses);
+            return View("ReadOnlyList", addresses);
         }
 
         public ActionResult New()

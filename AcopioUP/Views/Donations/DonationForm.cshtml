@@ -10,25 +10,19 @@
 
     <div class="form-group">
         @Html.LabelFor(d => d.ProductId)
-        <br/>
+        <br />
         @Html.DropDownListFor(d => d.ProductId, new SelectList(Model.Products, "Id", "Name"), "Selecciona el producto donado", new { @class = "form-control btn btn-info dropdown-toggle" })
         @Html.ValidationMessageFor(d => d.ProductId)
     </div>
     <div class="form-group">
-        <div class="input-group">
             @Html.LabelFor(d => d.Units)
-            <br/>
             @Html.TextBoxFor(d => d.Units, new { @class = "form-control", type = "number", id = "colorful", value = "1", min = "1", max = "10", style = "text-align: center" })
             @Html.ValidationMessageFor(d => d.Units)
-        </div>
     </div>
     <div class="form-group">
-        <div class="input-group">
             @Html.LabelFor(d => d.Description)
-            <br/>
             @Html.TextAreaFor(d => d.Description, new { @class = "form-control" })
             @Html.ValidationMessageFor(d => d.Description)
-        </div>
     </div>
 
     @Html.HiddenFor(d=> d.Id)

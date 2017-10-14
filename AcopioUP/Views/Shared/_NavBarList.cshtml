@@ -1,17 +1,18 @@
 ﻿@using AcopioUP.Models
-<li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+<li class="nav-item active">@Html.ActionLink("Inicio", "Index", "Home",null,new{@class= "nav-link" })</li>
 @if (User.IsInRole(RoleNames.CanManageDonations))
 {
-    <li>@Html.ActionLink("Productos Necesarios", "Index", "Products")</li>
-    <li>@Html.ActionLink("Mis Donaciones", "Index", "Donations")</li>
+    <li class="nav-item">@Html.ActionLink("Productos", "Index", "Products",null, new {@class= "nav-link" })</li>
+    <li class="nav-item">@Html.ActionLink("Mis Donaciones", "Index", "Donations", null, new { @class = "nav-link" })</li>
 }
 else
 {
-    <li>@Html.ActionLink("Donar", "Index", "Products")</li>
+    <li class="nav-item">@Html.ActionLink("Donar", "Index", "Products", null, new { @class = "nav-link" })</li>
 }
 @if (User.IsInRole(RoleNames.CanManageVictims))
 {
-    <li>@Html.ActionLink("Damnificados", "Index", "Victims")</li>
+    <li class="nav-item">@Html.ActionLink("Damnificados", "Index", "Victims", null, new { @class = "nav-link" })</li>
 }
-<li>@Html.ActionLink("Info", "About", "Home")</li>
-<li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+<li class="nav-item">@Html.ActionLink("Centros de Acopio", "Index", "Address", null, new { @class = "nav-link" })</li>
+<li class="nav-item">@Html.ActionLink("Info", "About", "Home", null, new { @class = "nav-link" })</li>
+<li class="nav-item">@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>

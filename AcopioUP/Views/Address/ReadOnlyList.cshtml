@@ -9,11 +9,6 @@
 {
     <p>No hay Centros de acopio agregados aun</p>
 }
-<p>
-    @Html.ActionLink("Agregar Dirección", "New", "Address", null, new { @class = "btn btn-primary", @style = "margin-bottom: 10px" })
-</p>
-
-
 
 @{ var total = Model.Count();}
 @for (var i = 0; i < total;)
@@ -31,7 +26,7 @@
                     <p class="card-text">@collector.StreetAddress</p>
                     <div class="card-footer">
                         <div style="text-align: center;">
-                            <small class="text-muted">@Html.ActionLink("Editar", "Edit", "Address", new { @id = collector.Id }, new { @class = "btn btn-info" })</small>
+                            <small class="text-muted">(449) 984-4920</small>
                         </div>
                     </div>
                 </div>
@@ -39,5 +34,5 @@
 
         }
     </div>
-    <br/>
+    <br />
 }
