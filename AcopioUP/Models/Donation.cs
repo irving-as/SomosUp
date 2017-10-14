@@ -12,6 +12,8 @@ namespace AcopioUP.Models
 
         public int ProductId { get; set; }
 
+        public Product Product { get; set; }
+
         public int Units { get; set; }
 
         public DateTime Date { get; set; }

@@ -17,8 +17,6 @@ namespace AcopioUP.App_Start
         private static void Initialize()
         {
             _configuration = new MapperConfigurationExpression();
-            _configuration.CreateMap<Victim, VictimDto>();
-            _configuration.CreateMap<VictimDto, Victim>();
             
             // Domain to Dto
             _configuration.CreateMap<Product, ProductDto>();

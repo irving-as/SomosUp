@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AcopioUP.Models.Donation>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Donaciones</h2>
+
+<p>
+    @Html.ActionLink("Nueva Donación", "New", "Donations", null, new { @class = "btn btn-primary" })
+</p>
+
+@if (!Model.Any())
+{
+    <p>No hay donaciones agregadas aún.</p>
+}
+
+<table id="victims" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Producto</th>
+        <th>Unidades</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var donation in Model)
+    {
+        <tr>
+            <td>
+                <img src="/Content/Images/Products/@donation.Product.ImgSrc" class="media-object" style="width: 60px" alt="@donation.Product.Name" />
+            </td>
+            <td>
+                @donation.Product.Name
+            </td>
+            <td>
+                @donation.Units
+                @*//@Html.ActionLink(donation.Units,"Edit","Victims",new { @id=donation.Id }, new { @style= "display: block;" } )*@
+            </td>
+            <td>
+                @donation.Description
+                @*//@Html.ActionLink(donation.Units,"Edit","Victims",new { @id=donation.Id }, new { @style= "display: block;" } )*@
+            </td>
+            <td>
+                @donation.Date
+                @*@Html.ActionLink(donation.Date, "Edit", "Victims", new { @id = donation.Id }, new { @style = "display: block;" })*@
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#victims").dataTable();
+        });
+    </script>
+}
+
+

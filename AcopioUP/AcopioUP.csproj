@@ -213,7 +213,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VictimsController.cs" />
-    <Compile Include="Dtos\VictimDto.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Dtos\ProductDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -270,6 +269,10 @@
     <Compile Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.cs" />
     <Compile Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.Designer.cs">
       <DependentUpon>201710132317517_AddCanCreateAccountsRoleToAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710140133533_AddedProductFieldInDonationModel.cs" />
+    <Compile Include="Migrations\201710140133533_AddedProductFieldInDonationModel.Designer.cs">
+      <DependentUpon>201710140133533_AddedProductFieldInDonationModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -623,6 +626,7 @@
     <Content Include="Views\Address\List.cshtml" />
     <Content Include="Views\Address\AddressForm.cshtml" />
     <Content Include="Views\Shared\_NavBarList.cshtml" />
+    <Content Include="Views\Donations\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -670,6 +674,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710132317517_AddCanCreateAccountsRoleToAdmin.resx">
       <DependentUpon>201710132317517_AddCanCreateAccountsRoleToAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710140133533_AddedProductFieldInDonationModel.resx">
+      <DependentUpon>201710140133533_AddedProductFieldInDonationModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
