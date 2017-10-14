@@ -2,7 +2,8 @@
 <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
 @if (User.IsInRole(RoleNames.CanManageDonations))
 {
-    <li>@Html.ActionLink("Donativos", "Index", "Donations")</li>
+    <li>@Html.ActionLink("Productos Necesarios", "Index", "Products")</li>
+    <li>@Html.ActionLink("Mis Donaciones", "Index", "Donations")</li>
 }
 else
 {

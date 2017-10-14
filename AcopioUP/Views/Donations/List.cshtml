@@ -14,7 +14,7 @@
     <p>No hay donaciones agregadas aún.</p>
 }
 
-<table id="victims" class="table table-bordered table-hover">
+<table id="donations" class="table table-bordered table-hover">
     <thead>
     <tr>
         <th></th>
@@ -29,7 +29,7 @@
     {
         <tr>
             <td>
-                <img src="/Content/Images/Products/@donation.Product.ImgSrc" class="media-object" style="width: 60px" alt="@donation.Product.Name" />
+                <img src="/Content/Images/Products/@donation.Product.ImgSrc" class="media-object" style="width: 60px;" alt="@donation.Product.Name" />
             </td>
             <td>
                 @donation.Product.Name
@@ -55,7 +55,7 @@
 {
     <script>
         $(document).ready(function () {
-            $("#victims").dataTable();
+            $("#donations").dataTable();
         });
     </script>
 }
