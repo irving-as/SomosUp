@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AcopioUP.Models;
 using AcopioUP.ViewModels;
@@ -36,13 +34,12 @@ namespace AcopioUP.Controllers
 
         public ActionResult New()
         {
-            var products = _context.Products.ToList();
+            var products = _context.Products.Where(p => p.UnitsInStock < p.UnitsNeeded).ToList();
 
             var viewModel = new DonationFormViewModel
             {
                 Products = products,
-                Date = DateTime.Now,
-                UserId = "a" //TODO: Let's consider for a moment the danger of exposing the UserId to the client... (even if it is within a hidden input)
+                Date = DateTime.Now
             };
 
             return View("DonationForm", viewModel);
@@ -50,31 +47,33 @@ namespace AcopioUP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Donation donation)
+        public ActionResult Save(DonationFormViewModel donationViewModel)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new DonationFormViewModel
-                {
-                    Products = _context.Products.ToList(),
-                    Date = DateTime.Now,
-                    UserId = "a"//TODO: Let's consider for a moment the danger of exposing the UserId to the client... (even if it is within a hidden input)
-                };
-                return View("DonationForm", viewModel);
+                return View("DonationForm", donationViewModel);
             }
 
-            //Only authenticated users can access this code, thereby, it shouldn't launch
-            //an exception unless a hacker is messing around...
-            var userInDb = _context.Users.Single(u => u.UserName == User.Identity.Name);
-
-            donation.UserId = userInDb.Id;//TODO: It could be added in a hidden input
-
-            var productInDb = _context.Products.SingleOrDefault(p => p.Id == donation.ProductId);
+            var productInDb = _context.Products
+                .Where(p => p.Id == donationViewModel.ProductId).SingleOrDefault(p => p.UnitsInStock + donationViewModel.Units <= p.UnitsNeeded);
             if (productInDb != null)
             {
-                productInDb.UnitsInStock += donation.Units;
+                productInDb.UnitsInStock += donationViewModel.Units;
+                var donation = new Donation
+                {
+                    Date = donationViewModel.Date,
+                    Description = donationViewModel.Description,
+                    ProductId = productInDb.Id,
+                    Units = donationViewModel.Units,
+                    UserId = User.Identity.GetUserId()
+                };
                 _context.Donations.Add(donation);
                 _context.SaveChanges();
+            }
+            else
+            {
+                //TODO:
+                throw new NotImplementedException("We must display message showing that the donation contains more products than needed.");
             }
 
             return RedirectToAction("Index", "Donations");

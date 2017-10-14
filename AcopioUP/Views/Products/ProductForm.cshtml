@@ -1,4 +1,4 @@
-﻿@model AcopioUP.Dtos.ProductDto
+﻿@model AcopioUP.ViewModels.ProductViewModel
 
 @{
     ViewBag.Title = "Agregar Producto";
@@ -33,12 +33,12 @@
                 <span id="fileNameText">No has seleccionado ningún archivo</span>
             </div>
             @Html.HiddenFor(p => p.Id)
+            @Html.Hidden("ImgSrc", "dummy") //TODO: find a better way to do this.
             @Html.AntiForgeryToken()
             <div class="btn-group">
                 @if (Model.Id != 0)
                 {
                     <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#deleteModal">Borrar Producto</button>
-                    //@Html.ActionLink("Borrar Producto", "Delete", new { @id = Model.Id }, new { @class = "btn btn-danger" })
                 }
                 <button disabled="@(Model.Id == 0)" id="submitButton" type="submit" class="btn btn-primary btn-lg">@(Model.Id == 0 ? "Agregar Producto" : "Editar Producto")</button>
             </div>

@@ -10,12 +10,8 @@ namespace AcopioUP.ViewModels
 {
     public class DonationFormViewModel
     {
-
         [Required]
         public int Id { get; set; }
-
-        [Required]
-        public string UserId { get; set; }
 
         [DisplayName("Producto")]
         public int ProductId { get; set; }

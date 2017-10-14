@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AcopioUP.Dtos;
+using AcopioUP.ViewModels;
 
 namespace AcopioUP.Models
 {
@@ -7,7 +7,7 @@ namespace AcopioUP.Models
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var product = (ProductDto)validationContext.ObjectInstance;
+            var product = (Product)validationContext.ObjectInstance;
 
             return product.UnitsInStock <= product.UnitsNeeded ? ValidationResult.Success : new ValidationResult("Ya se llegó a la meta del producto.");
         }

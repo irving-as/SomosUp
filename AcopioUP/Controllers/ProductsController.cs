@@ -3,9 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AcopioUP.Dtos;
 using AcopioUP.Models;
-using AutoMapper;
+using AcopioUP.ViewModels;
 
 namespace AcopioUP.Controllers
 {
@@ -37,12 +36,12 @@ namespace AcopioUP.Controllers
         [Authorize(Roles = RoleNames.CanManageProducts)]
         public ActionResult New()
         {
-            var productDto = new ProductDto
+            var productViewModel = new ProductViewModel
             {
                 UnitsInStock = 0
             };
 
-            return View("ProductForm", productDto);
+            return View("ProductForm", productViewModel);
         }
 
         [Authorize(Roles = RoleNames.CanManageProducts)]
@@ -53,7 +52,7 @@ namespace AcopioUP.Controllers
             if (productInDb == null)
                 return HttpNotFound();
 
-            return View("ProductForm", Mapper.Map<ProductDto>(productInDb));
+            return View("ProductForm", new ProductViewModel(productInDb));
         }
 
         [Authorize(Roles = RoleNames.CanManageProducts)]
@@ -75,35 +74,32 @@ namespace AcopioUP.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = RoleNames.CanManageProducts)]
-        public ActionResult Save(ProductDto productDto)
+        public ActionResult Save(Product product, HttpPostedFileBase productImage)
         {
-            var productImage = Request.Files["productImage"];
-
             if (!ModelState.IsValid)
             {
-                productDto = new ProductDto
-                {
-                    UnitsInStock = 0
-                };
-                return View("ProductForm", productDto);
+                var productViewModel = new ProductViewModel(product);
+                return View("ProductForm", productViewModel);
             }
 
-            if (productDto.Id == 0)
+            if (product.Id == 0)
             {
                 var imgSrc = SaveImageToLocation(productImage, "~/Content/Images/Products");
                 if (imgSrc == null)
-                    return View("ProductForm", productDto);
+                {
+                    var productViewModel = new ProductViewModel(product);
+                    return View("ProductForm", productViewModel);
+                }
 
-                var product = Mapper.Map<Product>(productDto);
                 product.ImgSrc = imgSrc;
                 _context.Products.Add(product);
             }
             else
             {
-                var productInDb = _context.Products.Single(p => p.Id == productDto.Id);
-                productInDb.Name = productDto.Name;
-                productInDb.UnitsInStock = productDto.UnitsInStock;
-                productInDb.UnitsNeeded = productDto.UnitsNeeded;
+                var productInDb = _context.Products.Single(p => p.Id == product.Id);
+                productInDb.Name = product.Name;
+                productInDb.UnitsInStock = product.UnitsInStock;
+                productInDb.UnitsNeeded = product.UnitsNeeded;
                 const string productImagesPath = "~/Content/Images/Products";
                 var imgSrc = SaveImageToLocation(productImage, productImagesPath);
                 if (imgSrc != null)
@@ -120,8 +116,9 @@ namespace AcopioUP.Controllers
 
         public string SaveImageToLocation(HttpPostedFileBase productImage, string path)
         {
+            if (productImage == null || path == null) return null;
             var extension = GetImageExtension(productImage);
-            if (productImage == null || extension == null)
+            if (extension == null)
                 return null;
 
             var imageName = CreateRandomFileName(extension);

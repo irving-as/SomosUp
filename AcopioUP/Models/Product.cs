@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AcopioUP.Models
 {
@@ -17,9 +13,10 @@ namespace AcopioUP.Models
         [Required]
         [StringLength(255)]
         public string ImgSrc { get; set; }
-        
+
         public int UnitsNeeded { get; set; }
 
+        [StockLessThanOrEqualThanNeeded]
         public int UnitsInStock { get; set; }
     }
 }
