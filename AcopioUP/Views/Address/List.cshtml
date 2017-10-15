@@ -44,7 +44,7 @@
         
         @if (i >= total && total % cardsPerRow !=0 && total>cardsPerRow)
         {
-            for (var j = 0; j <= total % cardsPerRow; j++)
+            for (var j = 0; j < cardsPerRow - (total % cardsPerRow); j++) 
             {
                 <div style="border-color: transparent;" class="card">
                     <img class="card-img-top"
