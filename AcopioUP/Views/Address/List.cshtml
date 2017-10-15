@@ -15,16 +15,19 @@
 
 
 
-@{ var total = Model.Count();}
+@{
+    var total = Model.Count();
+    var cardsPerRow = 4;
+}
 @for (var i = 0; i < total;)
 {
     <div class="card-deck">
-        @for (var j = 0; j < 4 && i < total; j++, i++)
+        @for (var j = 0; j < cardsPerRow && i < total; j++, i++)
         {
             var collector = Model.ElementAt(i);
             <div class="card">
                 <img class="card-img-top"
-                     src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Lat,@collector.Long&zoom=14&size=282x198&maptype=roadmap&markers=color:red%7Clabel:C%7C@collector.Lat,@collector.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
+                     src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Lat,@collector.Long&zoom=14&size=282x198&maptype=roadmap&markers=@collector.Lat,@collector.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
                      alt="Image">
                 <div class="card-body">
                     <h4 class="card-title">@collector.Id</h4>
@@ -38,6 +41,21 @@
             </div>
 
         }
+        
+        @if (i >= total && total % cardsPerRow !=0 && total>cardsPerRow)
+        {
+            for (var j = 0; j <= total % cardsPerRow; j++)
+            {
+                <div style="border-color: transparent;" class="card">
+                    <img class="card-img-top"
+                         alt="">
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            }
+        }
     </div>
-    <br/>
+    <br />
 }
