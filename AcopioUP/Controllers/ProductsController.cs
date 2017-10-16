@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -28,9 +29,16 @@ namespace AcopioUP.Controllers
         {
             var products = _context.Products;
             if (User.IsInRole(RoleNames.CanManageProducts))
+            {
                 return View("List", products);
+            }
 
-            return View("ReadOnlyList", products);
+            var vm = new ProductsReadOnlyListViewModel()
+            {
+                Users = _context.Users.Where(u => u.Address != null).Include(u => u.Address).ToList(),
+                Products = products
+            };
+            return View("ReadOnlyList", vm);
         }
 
         [Authorize(Roles = RoleNames.CanManageProducts)]

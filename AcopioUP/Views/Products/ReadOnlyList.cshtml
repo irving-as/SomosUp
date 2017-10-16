@@ -1,16 +1,71 @@
-﻿@model System.Data.Entity.DbSet<AcopioUP.Models.Product>
+﻿@using System.Text.RegularExpressions
+@model AcopioUP.ViewModels.ProductsReadOnlyListViewModel
 @{
     ViewBag.Title = "Index";
 }
 
+<h2>Donar</h2>
+
+<p>Si tienes algún producto de la lista puedes llevarlo a cualquiera de los siguientes centros de acopio.</p>
+
+@if (!Model.Users.Any())
+{
+    <p>No hay Centros de acopio agregados aun</p>
+}
+
+@{
+    var total = Model.Users.Count();
+    var cardsPerRow = 4;
+}
+@for (var i = 0; i < total;)
+{
+    <div class="card-deck">
+        @for (var j = 0; j < cardsPerRow && i < total; j++, i++)
+        {
+            var collector = Model.Users.ElementAt(i);
+            <div class="card">
+                <img class="card-img-top"
+                     src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Address.Lat,@collector.Address.Long&zoom=14&size=282x198&maptype=roadmap&markers=@collector.Address.Lat,@collector.Address.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
+                     alt="Image">
+                <div class="card-body">
+                    <h4 class="card-title">@collector.UserName</h4>
+                    <p class="card-text">@collector.Address.StreetAddress</p>
+                    <div class="card-footer">
+                        <div style="text-align: center;">
+                            <small class="text-muted">@Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        
+        @if (i >= total && total % cardsPerRow !=0 && total>cardsPerRow)
+        {
+            for (var j = 0; j < cardsPerRow - (total % cardsPerRow); j++)
+            {
+                <div style="border-color: transparent;" class="card">
+                    <img class="card-img-top"
+                         alt="">
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <br />
+}
+
 <h2>Productos Necesarios</h2>
 
-@if (!Model.Any())
+@if (!Model.Products.Any())
 {
     <p>No hay productos agregados aún.</p>
 }
 <ul class="list-group">
-    @foreach (var product in Model)
+    @foreach (var product in Model.Products)
     {
         var isProductStockComplete = product.UnitsNeeded == product.UnitsInStock;
         <li class="list-group-item">

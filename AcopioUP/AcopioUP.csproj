@@ -286,6 +286,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\DonationFormViewModel.cs" />
+    <Compile Include="ViewModels\ProductsReadOnlyListViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\VictimFormViewModel.cs" />
   </ItemGroup>
