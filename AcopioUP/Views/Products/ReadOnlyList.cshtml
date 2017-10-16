@@ -33,7 +33,7 @@
                     }
 
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped @(isProductStockComplete ? "progress-bar-success" : "")" role="progressbar"
+                        <div class="progress-bar progress-bar-striped @(isProductStockComplete ? "bg-green" : "bg-blue")" role="progressbar"
                              aria-valuenow="@product.UnitsInStock" aria-valuemin="0" aria-valuemax="@product.UnitsNeeded" style="width: @(100 * product.UnitsInStock / product.UnitsNeeded)%">
                         </div>
                     </div>

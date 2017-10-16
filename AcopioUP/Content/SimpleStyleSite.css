@@ -27,3 +27,61 @@ textarea {
     display: flex;
     align-items: center;
 }
+
+.bg-red {
+    background-color: #d04246 !important;
+}
+
+.bg-green {
+    background-color: #5cb85c !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #d04246;
+    border-color: #812023;
+}
+
+.bg-blue {
+    background-color: #1673ba !important;
+}
+
+.bg-green {
+    background-color: #5cb85c !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1673ba;
+    border-color: #105488;
+}
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #1467a6;
+        border-color: #105488;
+    }
+
+    .btn-primary:focus, .btn-primary.focus {
+        box-shadow: 0 0 0 3px rgba(20, 103, 166, 0.5);
+    }
+
+    .btn-primary.disabled, .btn-primary:disabled {
+        background-color: #346285;
+        border-color: #346285;
+    }
+
+    .btn-primary:active, .btn-primary.active,
+    .show > .btn-primary.dropdown-toggle {
+        background-color: #105488;
+        background-image: none;
+        border-color: #1673ba;
+    }
+
+a {
+    color: #1467a6;
+}
+
+    a:hover {
+        color: #1467a6;
+    }
