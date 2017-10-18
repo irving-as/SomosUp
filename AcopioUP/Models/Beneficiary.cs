@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AcopioUP.Models
 {
-    public class Victim
+    public class Beneficiary
     {
 
         public int Id { get; set; }

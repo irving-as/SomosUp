@@ -210,7 +210,7 @@
     <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\VictimsController.cs" />
+    <Compile Include="Controllers\BeneficiariesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -275,6 +275,14 @@
     <Compile Include="Migrations\201710181944289_AddNameToApplicationUser.Designer.cs">
       <DependentUpon>201710181944289_AddNameToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710182026032_RenameVictimsToBeneficiaries.cs" />
+    <Compile Include="Migrations\201710182026032_RenameVictimsToBeneficiaries.Designer.cs">
+      <DependentUpon>201710182026032_RenameVictimsToBeneficiaries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.cs" />
+    <Compile Include="Migrations\201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.Designer.cs">
+      <DependentUpon>201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -284,7 +292,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\RoleNames.cs" />
-    <Compile Include="Models\Victim.cs" />
+    <Compile Include="Models\Beneficiary.cs" />
     <Compile Include="Models\StockLessThanOrEqualThanNeeded.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -292,7 +300,7 @@
     <Compile Include="ViewModels\DonationFormViewModel.cs" />
     <Compile Include="ViewModels\ProductsReadOnlyListViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
-    <Compile Include="ViewModels\VictimFormViewModel.cs" />
+    <Compile Include="ViewModels\BeneficiaryFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -634,9 +642,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
-    <Content Include="Views\Victims\ReadOnlyList.cshtml" />
-    <Content Include="Views\Victims\List.cshtml" />
-    <Content Include="Views\Victims\VictimForm.cshtml" />
+    <Content Include="Views\Beneficiaries\ReadOnlyList.cshtml" />
+    <Content Include="Views\Beneficiaries\List.cshtml" />
+    <Content Include="Views\Beneficiaries\BeneficiaryForm.cshtml" />
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Products\ProductForm.cshtml" />
     <Content Include="Views\Products\ReadOnlyList.cshtml" />
@@ -708,6 +716,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710181944289_AddNameToApplicationUser.resx">
       <DependentUpon>201710181944289_AddNameToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182026032_RenameVictimsToBeneficiaries.resx">
+      <DependentUpon>201710182026032_RenameVictimsToBeneficiaries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.resx">
+      <DependentUpon>201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

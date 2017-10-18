@@ -7,7 +7,7 @@ namespace AcopioUP.Models
     {
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<Victim> Victims { get; set; }
+        public DbSet<Beneficiary> Beneficiaries { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
 

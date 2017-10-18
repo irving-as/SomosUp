@@ -1,11 +1,11 @@
-﻿@model AcopioUP.ViewModels.VictimFormViewModel
+﻿@model AcopioUP.ViewModels.BeneficiaryFormViewModel
 @{
     ViewBag.Title = Model.Title;
 }
 
 <h2>@Model.Title</h2>
 
-@using (Html.BeginForm("Save", "Victims"))
+@using (Html.BeginForm("Save", "Beneficiaries"))
 {
     <div class="form-group">
         @Html.LabelFor(v => v.FirstName)
@@ -44,7 +44,7 @@
 
                 bootbox.confirm({
                     title: '¡Cuidado!',
-                    message: '¿Estás seguro que quieres eliminar este damnificado?',
+                    message: '¿Estás seguro que quieres eliminar este beneficiario?',
                     buttons: {
                         'cancel': {
                             label: 'Cancelar',
@@ -57,7 +57,7 @@
                     },
                     callback: function(result) {
                         if (result) {
-                            window.location.href = "/victims/delete/@Model.Id";
+                            window.location.href = "/beneficiaries/delete/@Model.Id";
                         }
                     }
                 });

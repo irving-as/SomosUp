@@ -12,9 +12,9 @@ else
 {
     <li class="nav-item @(values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Donar", "Index", "Products", null, new { @class = "nav-link" })</li>
 }
-@if (User.IsInRole(RoleNames.CanManageVictims))
+@if (User.IsInRole(RoleNames.CanManageBeneficiaries))
 {
-    <li class="nav-item @(values["Controller"].ToString() == "Victims" ? "active" : "")">@Html.ActionLink("Damnificados", "Index", "Victims", null, new { @class = "nav-link" })</li>
+    <li class="nav-item @(values["Controller"].ToString() == "Beneficiaries" ? "active" : "")">@Html.ActionLink("Beneficiarios", "Index", "Beneficiaries", null, new { @class = "nav-link" })</li>
 }
 @if (User.Identity.IsAuthenticated)
 {

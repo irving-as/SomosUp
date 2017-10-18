@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using AcopioUP.Models;
 
 namespace AcopioUP.ViewModels
 {
-    public class VictimFormViewModel
+    public class BeneficiaryFormViewModel
     {
         public int Id { get; set; }
 
@@ -26,19 +22,19 @@ namespace AcopioUP.ViewModels
         [StringLength(255)]
         public string Email { get; set; }
 
-        public string Title => Id != 0 ? "Editar Damnificado" : "Nuevo Damnificado";
+        public string Title => Id != 0 ? "Editar Beneficiario" : "Nuevo Beneficiario";
 
-        public VictimFormViewModel()
+        public BeneficiaryFormViewModel()
         {
             Id = 0; 
         }
 
-        public VictimFormViewModel(Victim victim)
+        public BeneficiaryFormViewModel(Beneficiary beneficiary)
         {
-            Id = victim.Id;
-            FirstName = victim.FirstName;
-            LastName = victim.LastName;
-            Email = victim.Email;
+            Id = beneficiary.Id;
+            FirstName = beneficiary.FirstName;
+            LastName = beneficiary.LastName;
+            Email = beneficiary.Email;
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿@using AcopioUP.Models
+@model IEnumerable<Beneficiary>
+@{
+    ViewBag.Title = "ReadOnlyList";
+}
+
+<h2>Beneficiarios</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Beneficiario", "New", "Beneficiaries", null, new { @class = "btn btn-primary" })
+</p>
+<table id="beneficiaries" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var beneficiary in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(beneficiary.FullName,"Edit","Beneficiaries",new { @id=beneficiary.Id }, new { @style= "display: block;" } )
+            </td>
+            <td>
+                @Html.ActionLink(beneficiary.Email, "Edit", "Beneficiaries", new { @id = beneficiary.Id }, new { @style = "display: block;" })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#beneficiaries").DataTable();
+        });
+    </script>
+}

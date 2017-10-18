@@ -8,8 +8,8 @@ namespace AcopioUP.Models
     public static class RoleNames
     {
         public const string CanCreateAccounts = "CanCreateAccounts";
+        public const string CanManageBeneficiaries = "CanManageBeneficiaries";
         public const string CanManageDonations = "CanManageDonations";
         public const string CanManageProducts = "CanManageProducts";
-        public const string CanManageVictims = "CanManageVictims";
     }
 }
