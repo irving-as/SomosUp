@@ -154,6 +154,7 @@ namespace AcopioUP.Controllers
             {
                 var user = new ApplicationUser
                 {
+                    Name = model.Name,
                     UserName = model.Email,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,

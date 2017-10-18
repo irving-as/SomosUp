@@ -65,6 +65,11 @@ namespace AcopioUP.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(255, ErrorMessage = "El {0} debe de tener mínimo {2} caracteres", MinimumLength = 6)]
+        [Display(Name = "Nombre")]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
