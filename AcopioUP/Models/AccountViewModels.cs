@@ -85,6 +85,11 @@ namespace AcopioUP.Models
         [Display(Name = "Direccion")]
         public string StreetAddress { get; set; }
 
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Número de Teléfono")]
+        public string PhoneNumber { get; set; }
+
         [Display(Name = "Latitud")]
         public double Lat { get; set; }
 

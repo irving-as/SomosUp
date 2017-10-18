@@ -152,7 +152,13 @@ namespace AcopioUP.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = new Address { StreetAddress = model.StreetAddress, Lat = model.Lat, Long = model.Long } };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Address = new Address {StreetAddress = model.StreetAddress, Lat = model.Lat, Long = model.Long}
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

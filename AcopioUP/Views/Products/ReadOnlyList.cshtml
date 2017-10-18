@@ -30,10 +30,10 @@
                 <div class="card-body">
                     <h4 class="card-title">@collector.UserName</h4>
                     <p class="card-text">@collector.Address.StreetAddress</p>
-                    <div class="card-footer">
-                        <div style="text-align: center;">
-                            <small class="text-muted">@Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")</small>
-                        </div>
+                </div>
+                <div class="card-footer">
+                    <div style="text-align: center;">
+                        <small class="text-muted">@Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")</small>
                     </div>
                 </div>
             </div>
