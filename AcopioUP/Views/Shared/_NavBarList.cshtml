@@ -3,20 +3,16 @@
     var values = ViewContext.RouteData.Values;
 }
 <li class="nav-item @(values["Controller"].ToString() == "Home" && values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Inicio", "Index", "Home",null,new{@class= "nav-link" })</li>
+<li class="nav-item @(values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink(User.Identity.IsAuthenticated ? "Productos" : "Donar", "Index", "Products", null, new { @class = "nav-link" })</li>
 @if (User.IsInRole(RoleNames.CanManageDonations))
 {
-    <li class="nav-item @(values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Productos", "Index", "Products",null, new {@class= "nav-link" })</li>
     <li class="nav-item @(values["Controller"].ToString() == "Donations" ? "active" : "")">@Html.ActionLink("Mis Donaciones", "Index", "Donations", null, new { @class = "nav-link" })</li>
-}
-else
-{
-    <li class="nav-item @(values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Donar", "Index", "Products", null, new { @class = "nav-link" })</li>
 }
 @if (User.IsInRole(RoleNames.CanManageBeneficiaries))
 {
     <li class="nav-item @(values["Controller"].ToString() == "Beneficiaries" ? "active" : "")">@Html.ActionLink("Beneficiarios", "Index", "Beneficiaries", null, new { @class = "nav-link" })</li>
 }
-@if (User.Identity.IsAuthenticated)
+@if (User.IsInRole(RoleNames.CanCreateAccounts))
 {
     <li class="nav-item @(values["Controller"].ToString() == "Address" ? "active" : "")">@Html.ActionLink("Centros de Acopio", "Index", "Address", null, new { @class = "nav-link" })</li>
 }
