@@ -51,6 +51,7 @@ namespace AcopioUP.Controllers
         {
             if (!ModelState.IsValid)
             {
+                donationViewModel.IsDonationContainsMoreProductsThanNeeded = false;
                 return View("DonationForm", donationViewModel);
             }
 
@@ -72,8 +73,9 @@ namespace AcopioUP.Controllers
             }
             else
             {
-                //TODO:
-                throw new NotImplementedException("We must display message showing that the donation contains more products than needed.");
+                donationViewModel.IsDonationContainsMoreProductsThanNeeded = true;
+                donationViewModel.Products = _context.Products.Where(p => p.UnitsInStock < p.UnitsNeeded).ToList();
+                return View("DonationForm", donationViewModel);
             }
 
             return RedirectToAction("Index", "Donations");

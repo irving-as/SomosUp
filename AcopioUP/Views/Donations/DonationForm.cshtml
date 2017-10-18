@@ -7,7 +7,6 @@
 
 @using (Html.BeginForm("Save", "Donations"))
 {
-
     <div class="form-group">
         @Html.LabelFor(d => d.ProductId)
         <br />
@@ -15,18 +14,18 @@
         @Html.ValidationMessageFor(d => d.ProductId)
     </div>
     <div class="form-group">
-            @Html.LabelFor(d => d.Units)
-            @Html.TextBoxFor(d => d.Units, new { @class = "form-control", type = "number", id = "colorful", value = "1", min = "1", max = "10", style = "text-align: center" })
-            @Html.ValidationMessageFor(d => d.Units)
+        @Html.LabelFor(d => d.Units)
+        @Html.TextBoxFor(d => d.Units, new { @class = "form-control", type = "number", id = "colorful", value = "1", min = "1", max = "10", style = "text-align: center" })
+        @Html.ValidationMessageFor(d => d.Units)
     </div>
     <div class="form-group">
-            @Html.LabelFor(d => d.Description)
-            @Html.TextAreaFor(d => d.Description, new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.Description)
+        @Html.LabelFor(d => d.Description)
+        @Html.TextAreaFor(d => d.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.Description)
     </div>
 
-    @Html.HiddenFor(d=> d.Id)
-    @Html.HiddenFor(d=>d.Date)
+    @Html.HiddenFor(d => d.Id)
+    @Html.HiddenFor(d => d.Date)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Guardar</button>
 }
@@ -36,13 +35,22 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/bootstrap-number-input.js")
     <script>
-
-        $('#colorful').bootstrapNumber({
-            // default, danger, success , warning, info, primary
-            upClass: 'success',
-            downClass: 'danger',
-            center: true
+        $(document).ready(function () {
+            $('#colorful').bootstrapNumber({
+                // default, danger, success , warning, info, primary
+                upClass: 'success',
+                downClass: 'danger',
+                center: true
+            });
         });
     </script>
-
+    @if (Model.IsDonationContainsMoreProductsThanNeeded)
+    {
+        <script>
+            $(window).on('load',function() {
+                alert(
+                    "No se pudo agregar la donación, la cantidad de productos que se intenta agregar es mayor a la que hace falta.");
+            });
+        </script>
+    }
 }

@@ -27,6 +27,8 @@ namespace AcopioUP.ViewModels
 
         public IEnumerable<Product> Products { get; set; }
 
+        public bool IsDonationContainsMoreProductsThanNeeded { get; set; }
+
         public string Title => "Nueva Donación";
 
         public DonationFormViewModel()
