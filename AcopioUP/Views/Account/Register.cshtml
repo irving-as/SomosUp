@@ -35,18 +35,9 @@
             @Html.TextBoxFor(m => m.StreetAddress, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Lat, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Lat, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Long, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Long, new { @class = "form-control" })
-        </div>
-    </div>
+    <div id="map" style="height:400px;"></div>
+    @Html.HiddenFor(m => m.Lat)
+    @Html.HiddenFor(m => m.Long)
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />
@@ -56,4 +47,50 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsFAxJyQNfimorfTvraKgA8QKQlVwFpRw&amp;libraries=places"></script>
+    <script src="/Scripts/jquery.geocomplete.js"></script>
+    <script>
+        //function initMap() {
+        //    // Create a map object and specify the DOM element for display.
+        //    var map = new google.maps.Map(document.getElementById('map'), {
+        //        center: { lat: 19.3728043, lng: -99.1863231 },
+        //        zoom: 8
+        //    });
+        //    var geocoder = new google.maps.Geocoder()
+        //}
+
+        //function updateAddress(geocoder, resultsMap) {
+        //    var address = $("#StreetAddress").value;
+
+        //    geocoder.geocode({ 'address': address }, function (results, status) {
+        //        if (status === 'OK') {
+
+        //        } else {
+        //            alert('Geocode no funcionó por lo siguiente: ' + status);
+        //        }
+        //    });
+        //}
+
+        $(document).ready(function () {
+            var options = {
+                map: "#map",
+                mapOptions: {
+                    zoom: 15,
+                    center: { lat: 19.3728043, lng: -99.1863231 }
+                }
+            };
+
+            $("#StreetAddress").geocomplete(options)
+                .bind("geocode:result", function (event, result) {
+                    $("#Lat").val(result.geometry.location.lat());
+                    $("#Long").val(result.geometry.location.lng());
+                })
+                .bind("geocode:error", function (event, status) {
+                    alert('Geocode no funcionó por lo siguiente: ' + status);
+                });
+            $("#StreetAddress").focusout(function () {
+                $("#StreetAddress").trigger("geocode");
+            });
+        });
+    </script>
 }
