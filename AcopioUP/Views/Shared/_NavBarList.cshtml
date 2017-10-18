@@ -1,21 +1,24 @@
 ﻿@using AcopioUP.Models
-<li class="nav-item active">@Html.ActionLink("Inicio", "Index", "Home",null,new{@class= "nav-link" })</li>
+@{
+    var values = ViewContext.RouteData.Values;
+}
+<li class="nav-item @(values["Controller"].ToString() == "Home" && values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Inicio", "Index", "Home",null,new{@class= "nav-link" })</li>
 @if (User.IsInRole(RoleNames.CanManageDonations))
 {
-    <li class="nav-item">@Html.ActionLink("Productos", "Index", "Products",null, new {@class= "nav-link" })</li>
-    <li class="nav-item">@Html.ActionLink("Mis Donaciones", "Index", "Donations", null, new { @class = "nav-link" })</li>
+    <li class="nav-item @(values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Productos", "Index", "Products",null, new {@class= "nav-link" })</li>
+    <li class="nav-item @(values["Controller"].ToString() == "Donations" ? "active" : "")">@Html.ActionLink("Mis Donaciones", "Index", "Donations", null, new { @class = "nav-link" })</li>
 }
 else
 {
-    <li class="nav-item">@Html.ActionLink("Donar", "Index", "Products", null, new { @class = "nav-link" })</li>
+    <li class="nav-item @(values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Donar", "Index", "Products", null, new { @class = "nav-link" })</li>
 }
 @if (User.IsInRole(RoleNames.CanManageVictims))
 {
-    <li class="nav-item">@Html.ActionLink("Damnificados", "Index", "Victims", null, new { @class = "nav-link" })</li>
+    <li class="nav-item @(values["Controller"].ToString() == "Victims" ? "active" : "")">@Html.ActionLink("Damnificados", "Index", "Victims", null, new { @class = "nav-link" })</li>
 }
 @if (User.Identity.IsAuthenticated)
 {
-    <li class="nav-item">@Html.ActionLink("Centros de Acopio", "Index", "Address", null, new { @class = "nav-link" })</li>
+    <li class="nav-item @(values["Controller"].ToString() == "Address" ? "active" : "")">@Html.ActionLink("Centros de Acopio", "Index", "Address", null, new { @class = "nav-link" })</li>
 }
-<li class="nav-item">@Html.ActionLink("Info", "About", "Home", null, new { @class = "nav-link" })</li>
-<li class="nav-item">@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
+<li class="nav-item @(values["Controller"].ToString() == "Home" && values["Action"].ToString() == "About" ? "active" : "")">@Html.ActionLink("Info", "About", "Home", null, new { @class = "nav-link" })</li>
+<li class="nav-item @(values["Controller"].ToString() == "Home" && values["Action"].ToString() == "Contact" ? "active" : "")">@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
