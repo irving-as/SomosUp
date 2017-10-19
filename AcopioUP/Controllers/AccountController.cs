@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -181,6 +182,55 @@ namespace AcopioUP.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [Authorize(Roles = RoleNames.CanManageDonations + "," + RoleNames.CanCreateAccounts)]
+        public ActionResult EditProfile(string userId = null)
+        {
+            var context = new ApplicationDbContext();
+            var id = User.Identity.GetUserId();
+
+            if (User.IsInRole(RoleNames.CanCreateAccounts))
+                id = userId;
+            
+            var userInDb = context.Users.Include(u => u.Address).First(u => u.Id == id);
+            var viewModel = new EditProfileViewModel()
+            {
+                Id = userId,
+                Name = userInDb.Name,
+                PhoneNumber = userInDb.PhoneNumber,
+                StreetAddress = userInDb.Address.StreetAddress,
+                Lat = userInDb.Address.Lat,
+                Long = userInDb.Address.Long
+            };
+
+            return View("ProfileForm", viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.CanManageDonations + "," + RoleNames.CanCreateAccounts)]
+        public ActionResult SaveProfile(EditProfileViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("ProfileForm",viewModel);
+            }
+
+            var context = new ApplicationDbContext();
+            var id = string.IsNullOrWhiteSpace(viewModel.Id) ? User.Identity.GetUserId() : viewModel.Id;
+            var userInDb = context.Users.Include(u => u.Address).First(u => u.Id == id);
+
+            userInDb.Name = viewModel.Name;
+            userInDb.PhoneNumber = viewModel.PhoneNumber;
+            userInDb.Address.Lat = viewModel.Lat;
+            userInDb.Address.Long = viewModel.Long;
+            userInDb.Address.StreetAddress = viewModel.StreetAddress;
+            context.SaveChanges();
+
+            if(User.IsInRole(RoleNames.CanManageDonations))
+                return RedirectToAction("Index", "Donations");
+            return RedirectToAction("Index", "Address");
         }
 
         //

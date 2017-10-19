@@ -63,26 +63,18 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsFAxJyQNfimorfTvraKgA8QKQlVwFpRw&amp;libraries=places"></script>
     <script src="/Scripts/jquery.geocomplete.js"></script>
     <script>
-        //function initMap() {
-        //    // Create a map object and specify the DOM element for display.
-        //    var map = new google.maps.Map(document.getElementById('map'), {
-        //        center: { lat: 19.3728043, lng: -99.1863231 },
-        //        zoom: 8
-        //    });
-        //    var geocoder = new google.maps.Geocoder()
-        //}
 
-        //function updateAddress(geocoder, resultsMap) {
-        //    var address = $("#StreetAddress").value;
-
-        //    geocoder.geocode({ 'address': address }, function (results, status) {
-        //        if (status === 'OK') {
-
-        //        } else {
-        //            alert('Geocode no funcionó por lo siguiente: ' + status);
-        //        }
-        //    });
-        //}
+        function updateMarker() {
+            var map = $("#map");
+            var lat = document.getElementById("Lat").value;
+            var lng = document.getElementById("Long").value;
+            var latlng = new google.maps.LatLng(lat, lng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                title:"title"
+            });
+            marker.setMap(map);
+        }
 
         $(document).ready(function () {
             var options = {
@@ -103,6 +95,7 @@
                 });
             $("#StreetAddress").focusout(function () {
                 $("#StreetAddress").trigger("geocode");
+                updateMarker();
             });
         });
     </script>

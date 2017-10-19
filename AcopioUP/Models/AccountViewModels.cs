@@ -102,6 +102,33 @@ namespace AcopioUP.Models
         public double Long { get; set; }
     }
 
+    public class EditProfileViewModel
+    {
+        [StringLength(255)]
+        public string Id { get; set; }
+
+        [Required]
+        [StringLength(255, ErrorMessage = "El {0} debe de tener mínimo {2} caracteres", MinimumLength = 6)]
+        [Display(Name = "Nombre")]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Direccion")]
+        public string StreetAddress { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Número de Teléfono")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Latitud")]
+        public double Lat { get; set; }
+
+        [Display(Name = "Longitud")]
+        public double Long { get; set; }
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]

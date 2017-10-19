@@ -296,7 +296,6 @@
     <Compile Include="Models\StockLessThanOrEqualThanNeeded.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\DonationFormViewModel.cs" />
     <Compile Include="ViewModels\ProductsReadOnlyListViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -651,7 +650,6 @@
     <Content Include="Views\Shared\_SimpleLayout.cshtml" />
     <Content Include="Views\Donations\DonationForm.cshtml" />
     <Content Include="Views\Address\List.cshtml" />
-    <Content Include="Views\Address\AddressForm.cshtml" />
     <Content Include="Views\Shared\_NavBarList.cshtml" />
     <Content Include="Views\Donations\List.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -663,6 +661,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Address\ReadOnlyList.cshtml" />
+    <Content Include="Views\Account\ProfileForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,8 +14,8 @@ namespace AcopioUP
                 "~/Scripts/bootbox.js",
                 "~/Scripts/respond.js",
                 "~/scripts/datatables/jquery.datatables.js",
-                //"~/scripts/datatables/datatables.bootstrap.js",
                 "~/scripts/datatables/datatables.bootstrap4.js",
+                "~/scripts/popper.js",
                 "~/scripts/typeahead.bundle.js"
                 ));
 
@@ -29,13 +29,11 @@ namespace AcopioUP
 
             bundles.Add(new StyleBundle("~/SimpleContent/css").Include(
                       "~/Content/bootstrap.css",
-                      //"~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/datatables/css/datatables.bootstrap4.css",
                       "~/Content/SimpleStyleSite.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                //"~/Content/datatables/css/datatables.bootstrap.css",
                 "~/Content/datatables/css/datatables.bootstrap4.css",
                 "~/Content/typeahead.css",
                 "~/Content/site.css"));

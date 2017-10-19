@@ -1,0 +1,87 @@
+﻿@model  AcopioUP.Models.EditProfileViewModel
+@{
+    ViewBag.Title = "EditProfile";
+}
+
+<h2>Editar Perfil</h2>
+
+@using (Html.BeginForm("SaveProfile", "Account"))
+{
+    <div class="form-group">
+        @Html.LabelFor(p => p.Name)
+        @Html.TextBoxFor(p=>p.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.PhoneNumber)
+        @Html.TextBoxFor(p => p.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.PhoneNumber)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p=>p.StreetAddress)
+        @Html.TextBoxFor(m => m.StreetAddress, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p=>p.StreetAddress)
+    </div>
+    <div id="map" style="height:400px;"></div>
+    <br/>
+
+    @Html.HiddenFor(c => c.Lat)
+    @Html.HiddenFor(c => c.Long)
+    @Html.HiddenFor(c => c.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Guardar</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsFAxJyQNfimorfTvraKgA8QKQlVwFpRw&amp;libraries=places"></script>
+    <script src="/Scripts/jquery.geocomplete.js"></script>
+    <script>
+
+        function updateMarker() {
+            var map = $("#map");
+            var lat = document.getElementById("Lat").value;
+            var lng = document.getElementById("Long").value;
+            var latlng = new google.maps.LatLng(lat, lng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                title:"@Model.Name"
+            });
+            marker.setMap(map);
+        }
+
+        $(document).ready(function () {
+            var lat = @Model.Lat;
+            var lng = @Model.Long;
+
+            var options = {
+                map: "#map",
+                mapOptions: {
+                    zoom: 15,
+                    center: { lat: lat, lng: lng }
+                }
+            };
+
+            $("#StreetAddress").geocomplete(options)
+                .bind("geocode:result", function (event, result) {
+                    $("#Lat").val(result.geometry.location.lat());
+                    $("#Long").val(result.geometry.location.lng());
+                })
+                .bind("geocode:error", function (event, status) {
+                    alert('Geocode no funcionó por lo siguiente: ' + status);
+                });
+            $("#StreetAddress").focusout(function () {
+                $("#StreetAddress").trigger("geocode");
+                updateMarker();
+            });
+
+            document.getElementById("StreetAddress").focus();
+            document.getElementById("StreetAddress").blur();
+
+        });
+    </script>
+}
+
+
+
+
