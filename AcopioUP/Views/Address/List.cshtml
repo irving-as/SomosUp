@@ -13,46 +13,28 @@
 
 @{
     var total = Model.Count();
-    var cardsPerRow = 4;
 }
-@for (var i = 0; i < total;)
-{
-    <div class="card-deck">
-        @for (var j = 0; j < cardsPerRow && i < total; j++, i++)
+
+<div class="container">
+    <div class="row">
+        @for (var i = 0; i < total; i++)
         {
             var collector = Model.ElementAt(i);
-            <div class="card">
-                <img class="card-img-top"
-                     src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Address.Lat,@collector.Address.Long&zoom=14&size=282x198&maptype=roadmap&markers=@collector.Address.Lat,@collector.Address.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
-                     alt="Image">
-                <div class="card-body">
+            <div class="col-md-4 panel">
+                <div class="panel-body">
+                    <img class="img-responsive"
+                         src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Address.Lat,@collector.Address.Long&zoom=14&size=282x198&maptype=roadmap&markers=@collector.Address.Lat,@collector.Address.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
+                         alt="Image">
                     <h4 class="card-title">@collector.Name</h4>
                     <p class="card-text">@collector.Address.StreetAddress</p>
                 </div>
-                <div class="card-footer">
+                <div class="panel-footer">
                     <div style="text-align: center;">
                         <small>@Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")</small>
-                        <small class="text-muted">@Html.ActionLink("Editar", "EditProfile", "Account", new { @userId = collector.Id}, new {@class = "btn btn-info"})</small>
+                        <small class="text-muted">@Html.ActionLink("Editar", "EditProfile", "Account", new { @userId = collector.Id }, new { @class = "btn btn-info" })</small>
                     </div>
                 </div>
             </div>
-
-        }
-        
-        @if (i >= total && total % cardsPerRow !=0 && total>cardsPerRow)
-        {
-            for (var j = 0; j < cardsPerRow - (total % cardsPerRow); j++) 
-            {
-                <div style="border-color: transparent;" class="card">
-                    <img class="card-img-top"
-                         alt="">
-                    <div class="card-body">
-                        <h4 class="card-title"></h4>
-                        <p class="card-text"></p>
-                    </div>
-                </div>
-            }
         }
     </div>
-    <br />
-}
+</div>

@@ -9,22 +9,22 @@
         <ul class="nav navbar-nav navbar-right">
             @if (User.IsInRole(RoleNames.CanCreateAccounts))
             {
-                <li class="nav-item">@Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" , @class= "nav-link" })</li>
+                <li>@Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             }
             @if (User.IsInRole(RoleNames.CanManageDonations))
             {
-                <li class="nav-item">@Html.ActionLink("Perfil", "EditProfile", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Perfil", "EditProfile", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             }
-            <li class="nav-item">
-                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="nav-link" })
+            <li>
+                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Cerrar Sesión</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Cerrar Sesión</a></li>
         </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">@Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class="nav-link" })</li>
+        <li class="nav-item">@Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
