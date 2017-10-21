@@ -21,6 +21,9 @@ namespace AcopioUP.Models
         [StringLength(255)]
         public string Description { get; set; }
 
+        [StringLength(255)]
+        public string DonorEmail { get; set; }
+
         [Required]
         [StringLength(255)]
         public string UserId { get; set; }

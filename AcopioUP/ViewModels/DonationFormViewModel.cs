@@ -31,6 +31,10 @@ namespace AcopioUP.ViewModels
 
         public string Title => "Nueva Donación";
 
+        [DisplayName("Email del donador")]
+        [StringLength(255)]
+        public string DonorEmail { get; set; }
+
         public DonationFormViewModel()
         {
             Date = DateTime.Now;

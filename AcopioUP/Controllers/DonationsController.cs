@@ -64,6 +64,7 @@ namespace AcopioUP.Controllers
                 {
                     Date = donationViewModel.Date,
                     Description = donationViewModel.Description,
+                    DonorEmail = donationViewModel.DonorEmail,
                     ProductId = productInDb.Id,
                     Units = donationViewModel.Units,
                     UserId = User.Identity.GetUserId()

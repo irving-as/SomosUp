@@ -21,14 +21,24 @@
             @Html.ValidationMessageFor(d => d.Units)
         </div>
     </div>
-        <div class="form-group">
-            <div class="input-group">
-                @Html.LabelFor(d => d.Description)
-                <br />
-                @Html.TextAreaFor(d => d.Description, new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.Description)
-            </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(d => d.DonorEmail)
+            <br />
+            @Html.TextBoxFor(d => d.DonorEmail, new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.DonorEmail)
         </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(d => d.Description)
+            <br />
+            @Html.TextAreaFor(d => d.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.Description)
+        </div>
+    </div>
 
         @Html.HiddenFor(d => d.Id)
         @Html.HiddenFor(d => d.Date)

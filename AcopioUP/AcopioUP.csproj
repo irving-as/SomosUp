@@ -283,6 +283,10 @@
     <Compile Include="Migrations\201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.Designer.cs">
       <DependentUpon>201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710210033169_AddedOptionalDonorEmailToDonationModel.cs" />
+    <Compile Include="Migrations\201710210033169_AddedOptionalDonorEmailToDonationModel.Designer.cs">
+      <DependentUpon>201710210033169_AddedOptionalDonorEmailToDonationModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -722,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.resx">
       <DependentUpon>201710182027186_RenameCanManageVictimsToCanManageBeneficiaries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710210033169_AddedOptionalDonorEmailToDonationModel.resx">
+      <DependentUpon>201710210033169_AddedOptionalDonorEmailToDonationModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
