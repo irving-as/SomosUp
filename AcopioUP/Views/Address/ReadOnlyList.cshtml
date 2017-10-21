@@ -11,47 +11,46 @@
     <p>No hay Centros de acopio agregados aun</p>
 }
 
-@{
-    var total = Model.Count();
-    var cardsPerRow = 4;
-}
-@for (var i = 0; i < total;)
-{
-    <div class="card-deck">
-        @for (var j = 0; j < cardsPerRow && i < total; j++, i++)
+<table id="collection-centers" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Dirección</th>
+            <th>Mapa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var collector in Model)
         {
-            var collector = Model.ElementAt(i);
-            <div class="card">
-                <img class="card-img-top"
-                     src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Address.Lat,@collector.Address.Long&zoom=14&size=282x198&maptype=roadmap&markers=@collector.Address.Lat,@collector.Address.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
-                     alt="Image">
-                <div class="card-body">
-                    <h4 class="card-title">@collector.Name</h4>
-                    <p class="card-text">@collector.Address.StreetAddress</p>
-                </div>
-                <div class="card-footer">
-                    <div style="text-align: center;">
-                        <small class="text-muted">@Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")</small>
-                    </div>
-                </div>
-            </div>
+            <tr>
+                <td>
+                    @collector.Name
+                </td>
+                <td>
+                    @Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")
+                </td>
+                <td>
+                    @collector.Email
+                </td>
+                <td>
+                    @collector.Address.StreetAddress
+                </td>
+                <td>
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Address.Lat,@collector.Address.Long&zoom=14&size=200x140&maptype=roadmap&markers=@collector.Address.Lat,@collector.Address.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
+                         alt="Image">
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-        }
-        
-        @if (i >= total && total % cardsPerRow !=0 && total>cardsPerRow)
-        {
-            for (var j = 0; j < cardsPerRow - (total % cardsPerRow); j++)
-            {
-                 <div style="border-color: transparent;" class="card">
-                     <img class="card-img-top"
-                          alt="">
-                     <div class="card-body">
-                         <h4 class="card-title"></h4>
-                         <p class="card-text"></p>
-                     </div>
-                 </div>
-             }
-        }
-    </div>
-    <br />
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#collection-centers").DataTable();
+        });
+    </script>
 }

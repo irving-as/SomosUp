@@ -15,26 +15,37 @@
     var total = Model.Count();
 }
 
-<div class="container">
-    <div class="row">
-        @for (var i = 0; i < total; i++)
-        {
-            var collector = Model.ElementAt(i);
-            <div class="col-md-4 panel">
-                <div class="panel-body">
-                    <img class="img-responsive"
-                         src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Address.Lat,@collector.Address.Long&zoom=14&size=282x198&maptype=roadmap&markers=@collector.Address.Lat,@collector.Address.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
-                         alt="Image">
-                    <h4 class="card-title">@collector.Name</h4>
-                    <p class="card-text">@collector.Address.StreetAddress</p>
-                </div>
-                <div class="panel-footer">
-                    <div style="text-align: center;">
-                        <small>@Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")</small>
-                        <small class="text-muted">@Html.ActionLink("Editar", "EditProfile", "Account", new { @userId = collector.Id }, new { @class = "btn btn-info" })</small>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+<table id="collection-centers" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Dirección</th>
+        <th>Mapa</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var collector in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@collector.Name, "EditProfile", "Account", new { @userId = collector.Id }, new { @class = "btn btn-link" })
+            </td>
+            <td>
+                @Regex.Replace(collector.PhoneNumber, @"(\d{3})(\d{3})(\d{4})", "$1-$2-$3")
+            </td>
+            <td>
+                @collector.Email
+            </td>
+            <td>
+                @collector.Address.StreetAddress
+            </td>
+            <td>
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=@collector.Address.Lat,@collector.Address.Long&zoom=14&size=200x140&maptype=roadmap&markers=@collector.Address.Lat,@collector.Address.Long&key=AIzaSyB2dQPK3V1LjJu_-cTTeV-9qTyPEfsEynw"
+                     alt="Image">
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
