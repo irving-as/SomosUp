@@ -30,11 +30,13 @@ namespace AcopioUP
             bundles.Add(new StyleBundle("~/SimpleContent/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/SimpleStyleSite.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/datatables/css/datatables.bootstrap.css",
+                "~/Content/font-awesome.css",
                 "~/Content/typeahead.css",
                 "~/Content/site.css"));
         }
