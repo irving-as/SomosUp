@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    @Html.Partial("_Favico")
     @Styles.Render("~/SimpleContent/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -28,7 +29,13 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        <div class="container" style="background-color: white;">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
         <hr />
         <footer class="footer">
             <div class="container">

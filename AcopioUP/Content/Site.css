@@ -36,7 +36,8 @@
 html,
 body {
     height: 100%;
-    background-image: url("/Content/Images/banner01.png");
+    background: url("/Content/Images/banner01.png") no-repeat fixed;
+    background-size: cover;
 }
 
 body {
